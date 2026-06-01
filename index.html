@@ -1,293 +1,477 @@
-
-<!DOCTYPE html><html lang="en">
- 
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LocalRack | Coming Soon</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet"><style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Outfit',sans-serif;
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalRack — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── tokens ── */
+:root{
+  --deep:#050f07;
+  --dark:#091409;
+  --green:#1a7a37;
+  --mid:#239a44;
+  --lime:#7ed957;
+  --lime2:#a8f06a;
+  --muted:#6a9e78;
+  --ink:#e8f5ea;
+  --gold:#caa24a;
+  --line:rgba(126,217,87,.13);
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"Outfit",sans-serif;background:var(--deep);color:var(--ink);overflow-x:hidden;}
 
-body{
-background:linear-gradient(135deg,#0d3b1e,#15592c,#1a7a37);
-color:white;
-overflow-x:hidden;
-}
+/* ── fluid canvas ── */
+#c{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
+/* ── page wrapper ── */
+.wrap{position:relative;z-index:2;}
+
+/* ── hero ── */
 .hero{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:30px;
-text-align:center;
-position:relative;
-overflow:hidden;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 24px 100px;text-align:center;
+  position:relative;overflow:hidden;
 }
 
-.bg{
-position:absolute;
-inset:0;
-overflow:hidden;
-pointer-events:none;
-}
+/* soft radial glows */
+.glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);}
+.g1{width:600px;height:600px;background:radial-gradient(circle,rgba(126,217,87,.14),transparent 70%);top:-160px;left:-180px;animation:gf 16s ease-in-out infinite;}
+.g2{width:500px;height:500px;background:radial-gradient(circle,rgba(26,122,55,.18),transparent 70%);bottom:-100px;right:-160px;animation:gf 20s ease-in-out infinite;animation-delay:-8s;}
+.g3{width:300px;height:300px;background:radial-gradient(circle,rgba(202,162,74,.1),transparent 70%);top:45%;left:55%;transform:translate(-50%,-50%);animation:gf 24s ease-in-out infinite;animation-delay:-4s;}
+@keyframes gf{0%,100%{transform:scale(1) translateY(0);}50%{transform:scale(1.08) translateY(-30px);}}
 
-.bg span{
-position:absolute;
-font-size:25vw;
-font-weight:900;
-opacity:.03;
-animation:drift linear infinite;
-}
-
-.bg span:nth-child(1){
-top:5%;
-left:-20%;
-animation-duration:40s;
-}
-
-.bg span:nth-child(2){
-top:40%;
-right:-20%;
-animation-duration:55s;
-}
-
-.bg span:nth-child(3){
-bottom:5%;
-left:-15%;
-animation-duration:65s;
-}
-
-@keyframes drift{
-0%{transform:translateX(0);}
-50%{transform:translateX(120px);}
-100%{transform:translateX(0);}
-}
-
-.orbit-wrapper{
-position:relative;
-width:320px;
-height:320px;
-margin-bottom:40px;
-}
-
-.logo{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:120px;
-height:120px;
-border-radius:30px;
-background:linear-gradient(135deg,#7ed957,#239a44);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-color:#06240f;
-font-weight:900;
-box-shadow:0 0 40px rgba(126,217,87,.5);
-z-index:10;
-}
-
-.logo h1{
-font-size:42px;
-}
-
-.logo small{
-font-size:12px;
-}
-
-.ring{
-position:absolute;
-inset:0;
-animation:spin 24s linear infinite;
-}
-
-.ring2{
-animation-direction:reverse;
-animation-duration:36s;
-}
-
-.item{
-position:absolute;
-width:60px;
-height:60px;
-border-radius:50%;
-background:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-}
-
-.item:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
-.item:nth-child(2){top:20%;right:0;}
-.item:nth-child(3){bottom:20%;right:0;}
-.item:nth-child(4){bottom:0;left:50%;transform:translateX(-50%);}
-.item:nth-child(5){bottom:20%;left:0;}
-.item:nth-child(6){top:20%;left:0;}
-
-@keyframes spin{
-from{transform:rotate(0deg);}
-to{transform:rotate(360deg);}
-}
-
+/* coming soon badge */
 .badge{
-padding:10px 18px;
-border-radius:30px;
-background:rgba(126,217,87,.15);
-border:1px solid rgba(126,217,87,.3);
-margin-bottom:20px;
-font-weight:700;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:30px;
+  background:rgba(126,217,87,.08);border:1px solid rgba(126,217,87,.3);
+  font-size:11px;font-weight:700;letter-spacing:2.5px;color:var(--lime);
+  text-transform:uppercase;margin-bottom:32px;
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);
+  animation:blink 2.4s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 8px var(--lime);}50%{opacity:.3;box-shadow:none;}}
+
+/* main headline */
+.h1{
+  font-family:"Fraunces",serif;
+  font-size:clamp(48px,10vw,96px);
+  font-weight:900;line-height:1.03;
+  max-width:860px;margin:0 auto 24px;
+}
+.h1 em{font-style:italic;color:var(--lime);display:block;}
+
+.sub{
+  font-size:clamp(16px,2.4vw,20px);color:var(--muted);
+  max-width:520px;margin:0 auto 48px;line-height:1.75;font-weight:300;
 }
 
-.hero h2{
-font-size:clamp(40px,8vw,70px);
-line-height:1.1;
-margin-bottom:20px;
-max-width:900px;
+/* launch month pill */
+.launch{
+  display:inline-block;padding:14px 32px;border-radius:50px;
+  background:linear-gradient(135deg,var(--lime),var(--mid));
+  color:#040d06;font-weight:800;font-size:16px;
+  box-shadow:0 0 40px rgba(126,217,87,.35);
+  letter-spacing:.5px;
 }
 
-.hero p{
-max-width:700px;
-font-size:20px;
-opacity:.9;
-line-height:1.7;
+/* scroll cue */
+.scroll-cue{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--muted);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:40px;
+  background:linear-gradient(to bottom,var(--muted),transparent);
+  animation:drip 2s ease-in-out infinite;
+}
+@keyframes drip{0%,100%{opacity:1;transform:scaleY(1);}50%{opacity:.4;transform:scaleY(.6);}}
+
+/* ── divider ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);position:relative;z-index:2;}
+
+/* ── what you can make ── */
+.makes{position:relative;z-index:2;padding:100px 24px;}
+.makes-inner{max-width:1060px;margin:0 auto;}
+
+.kicker{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--lime);margin-bottom:18px;
+}
+.section-h{
+  font-family:"Fraunces",serif;
+  font-size:clamp(30px,5vw,54px);font-weight:900;line-height:1.1;
+  margin-bottom:14px;
+}
+.section-h em{font-style:italic;color:var(--lime);}
+.section-p{font-size:16px;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:56px;}
+
+/* card grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+
+.card{
+  background:rgba(255,255,255,.035);border:1px solid var(--line);
+  border-radius:22px;padding:28px 24px;
+  transition:border-color .3s,transform .3s;position:relative;overflow:hidden;
+}
+.card:hover{border-color:rgba(126,217,87,.38);transform:translateY(-4px);}
+.card::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 10%,rgba(126,217,87,.05),transparent 60%);
+  pointer-events:none;
+}
+.card-icon{font-size:36px;margin-bottom:14px;display:block;}
+.card h3{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+.card p{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* ── example catalog strip ── */
+.catalog-strip{position:relative;z-index:2;padding:0 0 100px;overflow:hidden;}
+.catalog-strip .kicker{padding:0 24px;}
+.catalog-strip .section-h{padding:0 24px;margin-bottom:40px;}
+.strip-track{
+  display:flex;gap:16px;padding:0 24px;
+  animation:slide-l 35s linear infinite;
+  width:max-content;
+}
+.strip-track:hover{animation-play-state:paused;}
+@keyframes slide-l{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.strip-fade-l{position:absolute;left:0;top:0;bottom:0;width:60px;background:linear-gradient(90deg,var(--deep),transparent);z-index:3;pointer-events:none;}
+.strip-fade-r{position:absolute;right:0;top:0;bottom:0;width:60px;background:linear-gradient(-90deg,var(--deep),transparent);z-index:3;pointer-events:none;}
+
+.cat-card{
+  width:200px;height:260px;border-radius:18px;
+  background:var(--green);border:1px solid var(--line);
+  flex:none;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+  font-weight:700;color:var(--ink);position:relative;overflow:hidden;
+  transition:box-shadow .3s;
+}
+.cat-card:hover{box-shadow:0 0 30px rgba(126,217,87,.2);}
+.cat-card .cat-icon{font-size:48px;}
+.cat-card .cat-name{font-size:14px;font-weight:700;color:var(--lime);}
+.cat-card .cat-desc{font-size:11px;color:var(--muted);text-align:center;padding:0 12px;}
+.cat-card::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(126,217,87,.06) 0%,rgba(0,0,0,.3) 100%);
 }
 
-.coming{
-margin-top:30px;
-padding:16px 30px;
-border-radius:16px;
-background:#7ed957;
-color:#06240f;
-font-weight:800;
-font-size:18px;
-}
-
-.about{
-background:white;
-color:#10231a;
-padding:80px 25px;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-}
-
-.about h3{
-font-size:42px;
-margin-bottom:20px;
-}
-
-.about p{
-font-size:18px;
-line-height:1.8;
-margin-bottom:20px;
-}
-
-.roadmap{
-margin-top:40px;
-display:grid;
-gap:15px;
-}
-// continue 
-.road{
-padding:18px;
-border-radius:16px;
-background:#f2f6f3;
-font-weight:700;
-}
-
-.done{
-border-left:5px solid #239a44;
-}
-
-.future{
-border-left:5px solid #caa24a;
-}
-
+/* ── InkAiron section ── */
 .studio{
-margin-top:60px;
-padding:25px;
-border-radius:20px;
-background:#0d3b1e;
-color:white;
-display:flex;
-gap:20px;
-align-items:center;
+  position:relative;z-index:2;
+  border-top:1px solid var(--line);
+  padding:100px 24px;
 }
-
-.mark{
-width:70px;
-height:70px;
-border-radius:16px;
-background:#1a7a37;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-font-weight:900;
-color:#7ed957;
+.studio-inner{max-width:860px;margin:0 auto;}
+.studio-card{
+  border:1px solid rgba(202,162,74,.22);border-radius:28px;
+  padding:48px 40px;
+  background:linear-gradient(135deg,rgba(202,162,74,.06) 0%,rgba(126,217,87,.03) 100%);
+  display:flex;gap:36px;align-items:center;position:relative;overflow:hidden;
 }
+@media(max-width:600px){
+  .studio-card{flex-direction:column;text-align:center;padding:32px 24px;gap:24px;}
+}
+.studio-card::before{
+  content:"INKAIRO";position:absolute;right:-30px;top:50%;transform:translateY(-50%);
+  font-family:"Fraunces",serif;font-size:110px;font-weight:900;
+  color:rgba(202,162,74,.04);pointer-events:none;white-space:nowrap;
+}
+.studio-logo{
+  width:110px;height:82px;flex:none;border-radius:12px;overflow:hidden;
+  border:1px solid rgba(202,162,74,.3);
+  box-shadow:0 0 30px rgba(202,162,74,.18);
+}
+.studio-logo img{width:100%;height:100%;object-fit:cover;}
+.studio-text{}
+.studio-text .tagline{
+  font-size:10px;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:10px;
+}
+.studio-text h2{
+  font-family:"Fraunces",serif;font-size:clamp(22px,3.5vw,32px);
+  font-weight:900;color:#e8c97a;margin-bottom:12px;
+}
+.studio-text p{font-size:14px;color:var(--muted);line-height:1.75;}
 
+/* ── footer ── */
 footer{
-padding:30px;
-text-align:center;
-opacity:.7;
+  border-top:1px solid var(--line);
+  padding:36px 24px;
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  gap:12px;max-width:1060px;margin:0 auto;
+  position:relative;z-index:2;
 }
+.ft-logo{display:flex;align-items:center;gap:10px;}
+.ft-mark{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,#1a7a37,#7ed957);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Fraunces",serif;font-weight:900;font-size:14px;color:#040d06;
+}
+.ft-logo span{font-weight:700;}
+.ft-logo span em{color:var(--lime);font-style:normal;}
+footer small{font-size:12px;color:var(--muted);}
 
-</style></head><body><section class="hero"><div class="bg">
-<span>LR</span>
-<span>LR</span>
-<span>LR</span>
-</div><div class="orbit-wrapper"><div class="ring">
-<div class="item">🍔</div>
-<div class="item">📱</div>
-<div class="item">👕</div>
-<div class="item">🛋️</div>
-<div class="item">💄</div>
-<div class="item">🔧</div>
-</div><div class="ring ring2">
-<div class="item">🛒</div>
-<div class="item">📦</div>
-<div class="item">🎨</div>
-<div class="item">💻</div>
-<div class="item">🍕</div>
-<div class="item">🧸</div>
-</div><div class="logo">
-<h1>LR</h1>
-<small>LOCALRACK</small>
-</div></div><div class="badge">
-⚡ Version 4.2 In Development
-</div><h2>
-Your Hustle,<br>
-Professionally Presented
-</h2><p>
-LocalRack helps small businesses create professional product catalogs,
-digital storefronts and shareable business profiles directly from their phones.
-</p><div class="coming">
-🚀 Full Platform Launching Soon
-</div></section><section class="about"><div class="container"><h3>Why LocalRack Exists</h3><p>
-Many small businesses already have products worth selling.
-What they often lack is a simple way to present those products professionally online.
-</p><p>
-LocalRack is being built to help entrepreneurs, side hustles, market stalls and local businesses create professional digital storefronts without needing a website designer.
-</p><div class="roadmap"><div class="road done">✓ Catalog Builder</div><div class="road done">✓ Store Profiles</div><div class="road done">✓ Discover Marketplace</div><div class="road future">◌ Reviews System</div><div class="road future">◌ Customer Accounts</div><div class="road future">◌ Online Payments</div><div class="road future">◌ Business Rankings</div></div><div class="studio"><div class="mark">✦</div><div>
-<h4>InkAiron Studios</h4><p>
-Create. Produce. Elevate.
-</p><p>
-Building practical digital tools for local businesses.
-</p>
-</div></div></div></section><footer>
-LocalRack • localrack.co.za
-</footer></body>
+/* ── reveal ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="wrap">
+
+<!-- hero -->
+<section class="hero">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+
+  <div class="badge"><span class="dot"></span>Coming · Mid June 2026</div>
+
+  <h1 class="h1">
+    Your hustle,<br>
+    <em>professionally presented.</em>
+  </h1>
+
+  <p class="sub">
+    Phone photos. Your price. One tap.<br>
+    A professional ad anyone can share anywhere.
+  </p>
+
+  <div class="launch">🚀 Launching June 2026 · localrack.co.za</div>
+
+  <div class="scroll-cue">scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- what you can make -->
+<section class="makes">
+  <div class="makes-inner">
+    <div class="kicker reveal">What you can make</div>
+    <h2 class="section-h reveal">Any product. Any hustle.<br><em>Catalog ready in minutes.</em></h2>
+    <p class="section-p reveal">No design skills needed. No laptop. No PowerPoint. Just your phone, your products, and LocalRack.</p>
+    <div class="grid">
+      <div class="card reveal">
+        <span class="card-icon">📸</span>
+        <h3>Snap your stock</h3>
+        <p>Take a photo of anything you sell. LocalRack turns it into a clean, professional product card.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">🎨</span>
+        <h3>Pick a template</h3>
+        <p>Food, fashion, electronics, furniture or general. Each template has its own style — choose what fits your vibe.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">📤</span>
+        <h3>Share on WhatsApp</h3>
+        <p>Download a clean PNG image. Drop it in any WhatsApp group, status, or Instagram story.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">🏪</span>
+        <h3>Your own storefront</h3>
+        <p>A public page for your store. Go Live. Customers find you on the LocalRack marketplace.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">🏆</span>
+        <h3>Compete for #1</h3>
+        <p>Rankings per category. Top sellers earn a free month. Views and likes build your score.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">💬</span>
+        <h3>Reviews from customers</h3>
+        <p>Real people leave real reviews on your store. Build trust. Get seen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- catalog strip -->
+<section class="catalog-strip">
+  <div class="makes-inner" style="margin-bottom:32px;">
+    <div class="kicker reveal">10 niches. Endless possibilities.</div>
+    <h2 class="section-h reveal">One app for <em>every hustle.</em></h2>
+  </div>
+  <div style="position:relative;">
+    <div class="strip-fade-l"></div>
+    <div class="strip-fade-r"></div>
+    <div class="strip-track">
+      <div class="cat-card"><span class="cat-icon">🍲</span><span class="cat-name">Food & Drinks</span><span class="cat-desc">Meals, snacks, drinks, catering</span></div>
+      <div class="cat-card"><span class="cat-icon">👕</span><span class="cat-name">Clothing & Fashion</span><span class="cat-desc">Thrift, streetwear, uniforms</span></div>
+      <div class="cat-card"><span class="cat-icon">💄</span><span class="cat-name">Beauty & Hair</span><span class="cat-desc">Services, products, prices</span></div>
+      <div class="cat-card"><span class="cat-icon">📱</span><span class="cat-name">Electronics & Tech</span><span class="cat-desc">Phones, accessories, repairs</span></div>
+      <div class="cat-card"><span class="cat-icon">🛋️</span><span class="cat-name">Furniture & Home</span><span class="cat-desc">Made or resold, big or small</span></div>
+      <div class="cat-card"><span class="cat-icon">🌿</span><span class="cat-name">Health & Wellness</span><span class="cat-desc">Supplements, remedies, care</span></div>
+      <div class="cat-card"><span class="cat-icon">🎨</span><span class="cat-name">Crafts & Handmade</span><span class="cat-desc">Beadwork, candles, art</span></div>
+      <div class="cat-card"><span class="cat-icon">🔧</span><span class="cat-name">Services & Repairs</span><span class="cat-desc">Car wash, tutoring, electrical</span></div>
+      <div class="cat-card"><span class="cat-icon">👶</span><span class="cat-name">Kids & Baby</span><span class="cat-desc">Clothing, toys, accessories</span></div>
+      <div class="cat-card"><span class="cat-icon">🛒</span><span class="cat-name">General / Mixed</span><span class="cat-desc">Spaza, variety, yard sales</span></div>
+      <!-- duplicate for loop -->
+      <div class="cat-card"><span class="cat-icon">🍲</span><span class="cat-name">Food & Drinks</span><span class="cat-desc">Meals, snacks, drinks, catering</span></div>
+      <div class="cat-card"><span class="cat-icon">👕</span><span class="cat-name">Clothing & Fashion</span><span class="cat-desc">Thrift, streetwear, uniforms</span></div>
+      <div class="cat-card"><span class="cat-icon">💄</span><span class="cat-name">Beauty & Hair</span><span class="cat-desc">Services, products, prices</span></div>
+      <div class="cat-card"><span class="cat-icon">📱</span><span class="cat-name">Electronics & Tech</span><span class="cat-desc">Phones, accessories, repairs</span></div>
+      <div class="cat-card"><span class="cat-icon">🛋️</span><span class="cat-name">Furniture & Home</span><span class="cat-desc">Made or resold, big or small</span></div>
+      <div class="cat-card"><span class="cat-icon">🌿</span><span class="cat-name">Health & Wellness</span><span class="cat-desc">Supplements, remedies, care</span></div>
+      <div class="cat-card"><span class="cat-icon">🎨</span><span class="cat-name">Crafts & Handmade</span><span class="cat-desc">Beadwork, candles, art</span></div>
+      <div class="cat-card"><span class="cat-icon">🔧</span><span class="cat-name">Services & Repairs</span><span class="cat-desc">Car wash, tutoring, electrical</span></div>
+      <div class="cat-card"><span class="cat-icon">👶</span><span class="cat-name">Kids & Baby</span><span class="cat-desc">Clothing, toys, accessories</span></div>
+      <div class="cat-card"><span class="cat-icon">🛒</span><span class="cat-name">General / Mixed</span><span class="cat-desc">Spaza, variety, yard sales</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- InkAiron Studios -->
+<section class="studio">
+  <div class="studio-inner">
+    <div class="kicker reveal">Who built this</div>
+    <div class="studio-card reveal">
+      <div class="studio-logo">
+        <img src="data:image/jpeg;base64,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" alt="InkAiron Studios"/>
+      </div>
+      <div class="studio-text">
+        <div class="tagline">Create · Produce · Elevate</div>
+        <h2>InkAiron Studios</h2>
+        <p>A South African digital studio building practical tools for real-world hustlers and local businesses. LocalRack is our first product. We build from the ground up — for the phone in your hand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="ft-logo">
+    <div class="ft-mark">LR</div>
+    <span>Local<em>Rack</em></span>
+  </div>
+  <small>Launching June 2026 · localrack.co.za</small>
+  <small>© 2026 InkAiron Studios</small>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+/* ══════════════════════════════════════════════════════
+   FLUID CANVAS — lime marks with glow, oil-in-water motion
+   Multiple sine waves at different frequencies = organic,
+   non-repeating displacement. Each mark has unique phase
+   so they never move in sync.
+══════════════════════════════════════════════════════ */
+(function(){
+  const cv = document.getElementById("c");
+  const cx = cv.getContext("2d");
+  let W, H, t = 0;
+
+  function resize(){ W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const MARKS = [];
+  const labels = ["LR","LR","localrack","LR","·LR·","LR"];
+
+  for(let i = 0; i < 22; i++){
+    MARKS.push({
+      x:  Math.random(),
+      y:  Math.random(),
+      px: Math.random() * Math.PI * 2,
+      py: Math.random() * Math.PI * 2,
+      pz: Math.random() * Math.PI * 2,
+      ax: 0.05 + Math.random() * 0.07,
+      ay: 0.05 + Math.random() * 0.07,
+      spd: 0.00025 + Math.random() * 0.00035,
+      label: labels[i % labels.length],
+      /* big marks vs small */
+      size:  i % 4 === 0 ? 0.052 : i % 3 === 0 ? 0.028 : 0.042,
+      alpha: 0.28 + Math.random() * 0.22,  /* more visible */
+      rot:   Math.random() * Math.PI * 2,
+      rotSpd:(Math.random() - 0.5) * 0.0003,
+    });
+  }
+
+  /* layered sine = fluid, non-repeating displacement */
+  function fluid(x, y, t){
+    return (
+      Math.sin(x * 3.1 + t * 0.9  + y * 1.4) * 0.38 +
+      Math.sin(x * 1.8 + t * 1.3  + y * 3.1) * 0.26 +
+      Math.sin(x * 5.7 + t * 0.35 + y * 0.8) * 0.18 +
+      Math.sin(x * 0.7 + t * 2.1  + y * 4.3) * 0.18
+    );
+  }
+
+  function draw(){
+    cx.clearRect(0, 0, W, H);
+
+    MARKS.forEach(m => {
+      const nx = fluid(m.x * 2,   m.y * 1.5, t + m.px) * m.ax;
+      const ny = fluid(m.x * 1.5, m.y * 2,   t * 0.75 + m.py) * m.ay;
+
+      m.x += m.spd * 0.5 + nx * 0.002;
+      m.y += m.spd * 0.25 + ny * 0.002;
+      m.rot += m.rotSpd;
+
+      /* wrap */
+      if(m.x >  1.25) m.x = -0.25;
+      if(m.x < -0.25) m.x =  1.25;
+      if(m.y >  1.25) m.y = -0.25;
+      if(m.y < -0.25) m.y =  1.25;
+
+      const sx = m.x * W, sy = m.y * H;
+      const fs = m.size * Math.min(W, H);
+
+      cx.save();
+      cx.translate(sx, sy);
+      cx.rotate(m.rot + fluid(m.x, m.y, t * 0.4 + m.pz) * 0.25);
+
+      /* glow effect: draw blurred shadow first, then crisp text on top */
+      cx.globalAlpha = m.alpha * 0.55;
+      cx.shadowColor = "#7ed957";
+      cx.shadowBlur  = 18;
+      cx.fillStyle   = "#7ed957";
+      cx.font = `900 ${fs}px "Fraunces", serif`;
+      cx.textAlign = "center";
+      cx.textBaseline = "middle";
+      cx.fillText(m.label, 0, 0);
+
+      /* crisp layer on top */
+      cx.shadowBlur  = 0;
+      cx.globalAlpha = m.alpha;
+      cx.fillText(m.label, 0, 0);
+
+      cx.restore();
+    });
+
+    t += 0.007;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+
+/* ══════════════════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════════════════ */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const siblings = [...(e.target.parentElement?.querySelectorAll(".reveal:not(.in)") || [])];
+      const delay = Math.min(siblings.indexOf(e.target) * 90, 360);
+      setTimeout(() => e.target.classList.add("in"), delay);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+</script>
+</body>
 </html>
