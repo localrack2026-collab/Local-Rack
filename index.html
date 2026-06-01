@@ -1,1963 +1,292 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
+
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="Local Rack — Your hustle, professionally presented."/>
-<title>Local Rack v5</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
-/* ═══════════════════════════════════════════════
-   DESIGN TOKENS — light default, dark override
-   ═══════════════════════════════════════════════ */
-:root{
-  --brand:#16a34a;--brand-l:#22c55e;--brand-d:#14532d;
-  --glow:rgba(22,163,74,0.16);--lime:#84cc16;
-  --gold:#f59e0b;--gold-l:#fbbf24;--danger:#ef4444;
-  --admin:#7c3aed;--admin-l:#a78bfa;--admin-glow:rgba(124,58,237,0.18);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LocalRack | Coming Soon</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet"><style>
 
-  /* Light */
-  --bg:#f4f6f4;--bg2:#eaede9;
-  --sur:#ffffff;--sur2:#f0f3f0;--sur3:#e4e9e4;
-  --b1:rgba(0,0,0,0.07);--b2:rgba(0,0,0,0.13);
-  --t1:#0c1e0e;--t2:#3a5940;--t3:#788f7c;--t4:#afc4b3;
-  --sh:0 2px 10px rgba(0,0,0,0.07);
-  --sh-lg:0 8px 30px rgba(0,0,0,0.11);
-  --sh-xl:0 20px 56px rgba(0,0,0,0.15);
-  --nav-bg:rgba(244,246,244,0.93);
-  --modal-bg:rgba(0,0,0,0.42);
-  --fd:'Syne',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
-  --nav-h:60px;--pad:18px;--r:16px;
-  --tf:140ms ease;--tm:270ms ease;--ts:400ms cubic-bezier(0.175,0.885,0.32,1.275);
-}
-[data-theme="dark"]{
-  --bg:#0b130d;--bg2:#0f1810;
-  --sur:#152018;--sur2:#1b2b1e;--sur3:#223228;
-  --b1:rgba(255,255,255,0.06);--b2:rgba(255,255,255,0.12);
-  --t1:#edfaef;--t2:#94c19b;--t3:#4f7a57;--t4:#2b4830;
-  --sh:0 2px 10px rgba(0,0,0,0.4);
-  --sh-lg:0 8px 30px rgba(0,0,0,0.5);
-  --sh-xl:0 20px 56px rgba(0,0,0,0.6);
-  --nav-bg:rgba(11,19,13,0.93);
-  --modal-bg:rgba(0,0,0,0.72);
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
 }
 
-/* ═══ RESET ═══ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
-body{font-family:var(--fb);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background var(--tm),color var(--tm);max-width:100vw}
-img{display:block;max-width:100%}
-button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit}
-input,textarea{font-family:inherit}
-a{color:inherit;text-decoration:none}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--sur3);border-radius:2px}
-
-/* ═══ ANIMATIONS ═══ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideUp{from{opacity:0;transform:translateY(110%)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes scrollX{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(38px,-28px) scale(1.07)}66%{transform:translate(-24px,12px) scale(.94)}}
-@keyframes gradShift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
-@keyframes ripple{0%{transform:scale(0);opacity:.5}100%{transform:scale(5);opacity:0}}
-@keyframes adminPulse{0%,100%{box-shadow:0 0 0 0 var(--admin-glow)}50%{box-shadow:0 0 0 6px var(--admin-glow)}}
-
-/* ═══ ADMIN BANNER ═══ */
-.admin-banner{
-  position:fixed;top:var(--nav-h);left:0;right:0;z-index:190;
-  background:linear-gradient(90deg,var(--admin),#6d28d9);
-  padding:6px var(--pad);
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:11.5px;font-weight:700;color:#fff;
-  letter-spacing:0.3px;
-  box-shadow:0 2px 12px var(--admin-glow);
+body{
+background:linear-gradient(135deg,#0d3b1e,#15592c,#1a7a37);
+color:white;
+overflow-x:hidden;
 }
-.admin-banner.hide{display:none}
-.admin-badge{
-  display:flex;align-items:center;gap:6px;
-}
-.admin-dot{width:7px;height:7px;background:#a78bfa;border-radius:50%;animation:pulse 1.5s infinite}
-.admin-actions{display:flex;gap:8px}
-.admin-action-btn{
-  padding:3px 10px;border-radius:8px;font-size:10px;font-weight:700;
-  background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);
-  cursor:pointer;transition:all var(--tf);
-}
-.admin-action-btn:hover{background:rgba(255,255,255,0.28)}
-/* When admin banner is visible, push pages down */
-body.admin-mode .page{padding-top:calc(var(--nav-h) + 32px)}
-body.admin-mode .hero{padding-top:calc(var(--nav-h) + 44px)}
-body.admin-mode .discover-top,
-body.admin-mode .home-top,
-body.admin-mode .rack-top,
-body.admin-mode .create-top,
-body.admin-mode .add-prod-top,
-body.admin-mode .store-top,
-body.admin-mode .acct-top,
-body.admin-mode .plans-top{padding-top:calc(var(--nav-h) + 46px)}
 
-/* ═══ NAV ═══ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:var(--nav-h);display:flex;align-items:center;gap:10px;
-  padding:0 var(--pad);
-  background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--b1);transition:all var(--tm);
-}
-.nav-logo{display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0}
-.nav-mark{
-  width:32px;height:32px;border-radius:9px;
-  background:linear-gradient(135deg,var(--brand-d),var(--brand));
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fd);font-weight:800;font-size:12px;color:#fff;
-  box-shadow:0 2px 10px var(--glow);flex-shrink:0;
-}
-.nav-name{font-family:var(--fd);font-weight:800;font-size:16px;letter-spacing:-.4px;color:var(--brand)}
-.nav-live{
-  display:flex;align-items:center;gap:5px;
-  background:var(--sur2);border:1px solid var(--b2);border-radius:20px;
-  padding:3px 10px;font-size:10.5px;font-weight:600;color:var(--t2);
-  margin-left:auto;flex-shrink:0;
-}
-.live-dot{width:6px;height:6px;background:var(--brand-l);border-radius:50%;animation:pulse 2s infinite}
-.nav-links{display:flex;gap:3px;align-items:center}
-.nav-link{height:32px;padding:0 13px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--t2);transition:all var(--tf)}
-.nav-link:hover{background:var(--sur2);color:var(--t1)}
-.nav-cta{height:32px;padding:0 15px;border-radius:9px;background:var(--brand);color:#fff;font-size:12.5px;font-weight:700;box-shadow:0 2px 8px var(--glow);transition:all var(--tf)}
-.nav-cta:hover{background:var(--brand-l)}
-.nav-burger{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--sur2);border:1px solid var(--b1);font-size:15px;color:var(--t1);transition:all var(--tf)}
-.nav-burger:hover{background:var(--sur3)}
-
-/* ═══ BURGER DRAWER ═══ */
-.burger-ov{position:fixed;inset:0;z-index:190;background:var(--modal-bg);opacity:0;pointer-events:none;transition:opacity var(--tm)}
-.burger-ov.open{opacity:1;pointer-events:all}
-.burger-drawer{
-  position:fixed;top:0;right:0;bottom:0;z-index:195;
-  width:min(300px,85vw);background:var(--sur);
-  border-left:1px solid var(--b1);box-shadow:var(--sh-xl);
-  transform:translateX(110%);transition:transform var(--ts);
-  display:flex;flex-direction:column;overflow-y:auto;
-}
-.burger-drawer.open{transform:translateX(0)}
-.dh{padding:18px var(--pad);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between}
-.dh-user{display:flex;align-items:center;gap:11px}
-.dh-av{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--brand-d),var(--brand));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:17px;color:#fff;flex-shrink:0}
-.dh-av.admin-av{background:linear-gradient(135deg,var(--admin),#6d28d9);animation:adminPulse 2s infinite}
-.dh-name{font-weight:700;font-size:14px;color:var(--t1)}
-.dh-email{font-size:11px;color:var(--t3);margin-top:1px}
-.dh-close{width:30px;height:30px;border-radius:7px;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t2);cursor:pointer;transition:all var(--tf)}
-.dh-close:hover{background:var(--sur3);color:var(--t1)}
-.db{flex:1;padding:10px}
-.ds-title{font-size:9.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.3px;padding:7px 9px 3px}
-.di{display:flex;align-items:center;gap:11px;padding:11px 9px;border-radius:11px;font-size:13.5px;font-weight:500;color:var(--t1);cursor:pointer;width:100%;text-align:left;transition:all var(--tf)}
-.di:hover{background:var(--sur2)}
-.di-ico{font-size:17px;width:22px;text-align:center;flex-shrink:0}
-.di-txt{flex:1}
-.di-badge{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:9px;background:var(--glow);color:var(--brand)}
-.di-badge.adm{background:var(--admin-glow);color:var(--admin-l)}
-.dd{height:1px;background:var(--b1);margin:7px 0}
-.theme-row{display:flex;align-items:center;justify-content:space-between;padding:9px 9px}
-.theme-pill{display:flex;gap:3px;background:var(--sur2);border:1px solid var(--b1);border-radius:20px;padding:3px}
-.th-opt{padding:4px 11px;border-radius:16px;font-size:10.5px;font-weight:700;cursor:pointer;color:var(--t3);transition:all var(--tf)}
-.th-opt.act{background:var(--brand);color:#fff;box-shadow:0 2px 7px var(--glow)}
-.d-logout{margin:7px;padding:11px 9px;border-radius:11px;display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:600;color:var(--danger);background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.14);cursor:pointer;width:calc(100% - 14px);text-align:left;transition:all var(--tf)}
-.d-logout:hover{background:rgba(239,68,68,0.12)}
-
-/* ═══ BOTTOM NAV ═══ */
-.bnav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--b1);padding-bottom:env(safe-area-inset-bottom,0)}
-.bnav-inner{display:flex;align-items:center;height:58px;padding:0 3px}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:100%;font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.3px;text-transform:uppercase;transition:color var(--tf)}
-.bnav-btn.act{color:var(--brand)}
-.bnav-ico{font-size:19px;transition:transform var(--tf)}
-.bnav-btn.act .bnav-ico{transform:scale(1.12)}
-.bnav-create{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--brand-d),var(--brand));display:flex;align-items:center;justify-content:center;font-size:21px;margin-top:-12px;box-shadow:0 4px 18px var(--glow);transition:all var(--tf);flex-shrink:0}
-.bnav-create:active{transform:scale(.95)}
-
-/* ═══ PAGES ═══ */
-.page{display:none;min-height:100vh;padding-top:var(--nav-h)}
-.page.act{display:block;animation:fadeIn 200ms ease}
-.app-shell{padding-bottom:76px}
-
-/* ═══ TOAST ═══ */
-.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--sur);border:1.5px solid var(--b2);border-radius:13px;padding:10px 18px;font-size:12.5px;font-weight:600;color:var(--t1);z-index:500;opacity:0;transition:all var(--tm);white-space:nowrap;box-shadow:var(--sh-lg);pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.ok{border-color:rgba(22,163,74,.35);color:var(--brand)}
-.toast.err{border-color:rgba(239,68,68,.35);color:var(--danger)}
-.toast.adm{border-color:rgba(124,58,237,.35);color:var(--admin-l)}
-
-/* ═══ MODAL / SHEET ═══ */
-.overlay{position:fixed;inset:0;z-index:300;background:var(--modal-bg);backdrop-filter:blur(7px);display:flex;align-items:flex-end;justify-content:center;animation:fadeIn 160ms ease}
-.overlay.hide{display:none}
-.sheet{width:100%;max-width:480px;background:var(--sur);border:1px solid var(--b1);border-radius:22px 22px 0 0;padding:18px var(--pad) env(safe-area-inset-bottom,22px);animation:slideUp 340ms cubic-bezier(.175,.885,.32,1.1) both;max-height:92vh;overflow-y:auto}
-.sheet-handle{width:34px;height:3.5px;background:var(--sur3);border-radius:2px;margin:0 auto 16px}
-.sheet-title{font-family:var(--fd);font-size:21px;font-weight:800;letter-spacing:-.5px;color:var(--t1);margin-bottom:3px}
-.sheet-sub{font-size:12.5px;color:var(--t2);margin-bottom:20px;line-height:1.5}
-
-/* ═══ FORMS ═══ */
-.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
-.fl{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.9px}
-.fi{width:100%;height:46px;background:var(--sur2);border:1.5px solid var(--b1);border-radius:11px;padding:0 13px;font-size:13.5px;color:var(--t1);outline:none;transition:all var(--tf)}
-.fi:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--glow)}
-.fi::placeholder{color:var(--t4)}
-.fi-wrap{position:relative}
-.fi-wrap .fi{padding-right:42px}
-.fi-eye{position:absolute;right:11px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t3);cursor:pointer;transition:color var(--tf)}
-.fi-eye:hover{color:var(--t1)}
-.ta{width:100%;background:var(--sur2);border:1.5px solid var(--b1);border-radius:11px;padding:11px 13px;font-size:13.5px;color:var(--t1);outline:none;resize:none;transition:all var(--tf)}
-.ta:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--glow)}
-.ferr{font-size:10.5px;color:var(--danger);margin-top:2px}
-.fhint{font-size:10.5px;color:var(--t3);margin-top:2px}
-
-/* ═══ BUTTONS ═══ */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:11px;font-weight:700;font-family:var(--fb);transition:all var(--tf);cursor:pointer;position:relative;overflow:hidden}
-.btn:active{transform:scale(.96)}
-.btn.sm{height:34px;padding:0 13px;font-size:12px}
-.btn.md{height:42px;padding:0 18px;font-size:13.5px}
-.btn.lg{height:50px;padding:0 24px;font-size:14.5px;font-family:var(--fd);letter-spacing:-.2px}
-.btn.full{width:100%}
-.btn.green{background:var(--brand);color:#fff;box-shadow:0 3px 11px var(--glow)}
-.btn.green:hover{background:var(--brand-l);box-shadow:0 5px 18px var(--glow)}
-.btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-l));color:#000;font-weight:800;box-shadow:0 3px 11px rgba(245,158,11,.28)}
-.btn.gold:hover{box-shadow:0 5px 18px rgba(245,158,11,.38)}
-.btn.ghost{background:var(--sur2);color:var(--t1);border:1.5px solid var(--b1)}
-.btn.ghost:hover{background:var(--sur3);border-color:var(--b2)}
-.btn.outline{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
-.btn.outline:hover{background:var(--glow)}
-.btn.red{background:rgba(239,68,68,.1);color:var(--danger);border:1.5px solid rgba(239,68,68,.22)}
-.btn.purple{background:var(--admin);color:#fff;box-shadow:0 3px 11px var(--admin-glow)}
-
-/* ═══ CHIPS ═══ */
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip-btn{padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:600;border:1.5px solid var(--b1);color:var(--t2);background:var(--sur2);cursor:pointer;transition:all var(--tf)}
-.chip-btn.act{background:var(--brand);color:#fff;border-color:var(--brand)}
-.chip-btn:hover:not(.act){border-color:var(--b2);color:var(--t1)}
-.chips-row{display:flex;gap:7px;overflow-x:auto;padding:9px var(--pad);scrollbar-width:none}
-.chips-row::-webkit-scrollbar{display:none}
-.chip-r{white-space:nowrap;padding:6px 13px;border-radius:20px;font-size:11.5px;font-weight:600;border:1.5px solid var(--b1);color:var(--t2);background:var(--sur);cursor:pointer;transition:all var(--tf);flex-shrink:0}
-.chip-r.act{background:var(--brand);color:#fff;border-color:var(--brand)}
-
-/* Toggle */
-.toggle{position:relative;width:42px;height:24px;flex-shrink:0}
-.toggle input{opacity:0;width:0;height:0;position:absolute}
-.tslider{position:absolute;inset:0;background:var(--sur3);border-radius:12px;cursor:pointer;transition:background var(--tm)}
-.tslider::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform var(--tm);box-shadow:0 1px 3px rgba(0,0,0,.22)}
-.toggle input:checked+.tslider{background:var(--brand)}
-.toggle input:checked+.tslider::before{transform:translateX(18px)}
-
-/* ═══ CARDS ═══ */
-.card{background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);overflow:hidden;transition:all var(--tm)}
-.card:hover{border-color:var(--b2)}
-
-/* Store card */
-.store-card{cursor:pointer}
-.store-card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
-.store-card.offline{opacity:.45;filter:grayscale(.65);pointer-events:none}
-.sc-banner{width:100%;height:108px;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:42px;position:relative}
-.sc-badge{position:absolute;top:7px;right:7px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px}
-.sc-live{background:rgba(22,163,74,.14);color:var(--brand);border:1px solid rgba(22,163,74,.28)}
-.sc-off{background:var(--sur3);color:var(--t3);border:1px solid var(--b1)}
-.sc-boost{background:rgba(245,158,11,.14);color:var(--gold);border:1px solid rgba(245,158,11,.28)}
-.sc-body{padding:11px}
-.sc-name{font-size:12.5px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sc-cat{font-size:10.5px;color:var(--t3);margin-top:1px}
-.sc-stats{display:flex;gap:9px;margin-top:6px;font-size:10px;font-weight:600;color:var(--t3)}
-
-/* Product card */
-.prod-card{cursor:pointer}
-.prod-card:hover{transform:translateY(-2px);box-shadow:var(--sh)}
-.prod-card.sel{border-color:var(--brand);box-shadow:0 0 0 2.5px var(--glow)}
-.prod-img{width:100%;aspect-ratio:1;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:40px;overflow:hidden;position:relative}
-.prod-img img{width:100%;height:100%;object-fit:cover}
-.prod-status{position:absolute;top:5px;left:5px;font-size:8.5px;font-weight:700;padding:2px 6px;border-radius:20px}
-.s-in{background:rgba(22,163,74,.14);color:var(--brand)}
-.s-lim{background:rgba(245,158,11,.14);color:var(--gold)}
-.s-out{background:var(--sur3);color:var(--t3)}
-.s-sale{background:rgba(239,68,68,.14);color:var(--danger)}
-.prod-check{position:absolute;top:5px;right:5px;width:21px;height:21px;background:var(--brand);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:800}
-.prod-card.sel .prod-check{display:flex}
-.prod-info{padding:9px 11px}
-.prod-name{font-size:11.5px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prod-cat{font-size:9.5px;color:var(--t3);margin-top:1px}
-.prod-price{color:var(--brand);font-weight:800;font-size:12.5px;margin-top:4px}
-.prod-orig{color:var(--t3);font-weight:400;font-size:9.5px;text-decoration:line-through;margin-left:4px}
-
-/* ═══ PRO TIP CARD ═══ */
-.pro-tip{
-  background:linear-gradient(135deg,rgba(22,163,74,.08),rgba(132,204,22,.06));
-  border:1.5px solid rgba(22,163,74,.2);border-radius:14px;
-  padding:14px 16px;margin-bottom:16px;
-  display:flex;align-items:flex-start;gap:12px;
-}
-.pro-tip-ico{font-size:22px;flex-shrink:0;margin-top:1px}
-.pro-tip-title{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:3px}
-.pro-tip-text{font-size:12px;color:var(--t2);line-height:1.55}
-.pro-tip-close{font-size:16px;color:var(--t3);cursor:pointer;margin-left:auto;padding:2px 4px;flex-shrink:0;transition:color var(--tf)}
-.pro-tip-close:hover{color:var(--t1)}
-
-/* ═══ USAGE BAR (weekly limit) ═══ */
-.usage-pill{
-  display:flex;align-items:center;gap:8px;
-  background:var(--sur2);border:1.5px solid var(--b1);border-radius:12px;
-  padding:10px 14px;margin-bottom:14px;
-}
-.usage-pill-ico{font-size:16px;flex-shrink:0}
-.usage-pill-info{flex:1}
-.usage-pill-title{font-size:12px;font-weight:700;color:var(--t1)}
-.usage-pill-sub{font-size:10.5px;color:var(--t3);margin-top:1px}
-.usage-track{height:3.5px;background:var(--sur3);border-radius:2px;overflow:hidden;margin-top:6px}
-.usage-fill{height:100%;border-radius:2px;transition:width .8s var(--ts)}
-.usage-fill.ok{background:var(--brand)}
-.usage-fill.warn{background:var(--gold)}
-.usage-fill.full{background:var(--danger)}
-.usage-reset{font-size:10px;color:var(--t3);margin-top:3px}
-
-/* ═══ LANDING ═══ */
 .hero{
-  position:relative;min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:calc(var(--nav-h) + 14px) var(--pad) 36px;
-  overflow:hidden;width:100%;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:30px;
+text-align:center;
+position:relative;
+overflow:hidden;
 }
-@media(max-width:768px){.hero{min-height:auto;padding:calc(var(--nav-h) + 10px) var(--pad) 28px}}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:.1}
-[data-theme="dark"] .orb{opacity:.17}
-.orb1{width:480px;height:480px;background:radial-gradient(circle,var(--brand),transparent);top:-70px;left:-70px;animation:orbDrift 14s ease-in-out infinite}
-.orb2{width:380px;height:380px;background:radial-gradient(circle,var(--lime),transparent);bottom:-50px;right:-70px;animation:orbDrift 18s ease-in-out infinite reverse}
-.orb3{width:260px;height:260px;background:radial-gradient(circle,var(--gold),transparent);top:40%;left:55%;opacity:.06;animation:orbDrift 11s ease-in-out infinite}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--b1) 1px,transparent 1px),linear-gradient(90deg,var(--b1) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(ellipse at center,black,transparent 72%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--sur);border:1.5px solid var(--b2);border-radius:20px;padding:5px 15px;font-size:11px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.6px;margin-bottom:20px;animation:fadeUp .8s var(--ts) both;box-shadow:var(--sh)}
-.hero-h1{
-  font-family:var(--fd);
-  font-size:clamp(28px,6vw,72px);
-  font-weight:800;line-height:1.08;
-  letter-spacing:-1.5px;
-  margin-bottom:16px;
-  animation:fadeUp .7s .1s var(--ts) both;
-  color:var(--t1);
-  word-break:break-word;
-  overflow-wrap:break-word;
-  max-width:100%;
-}
-.hero-h1 span{
-  background:linear-gradient(135deg,var(--brand) 0%,var(--lime) 50%,var(--brand-l) 100%);
-  background-size:200% 200%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation:gradShift 4s ease infinite;
-  display:inline-block;
-  max-width:100%;
-}
-@media(max-width:480px){
-  .hero-h1{font-size:clamp(26px,7.5vw,40px);letter-spacing:-1px}
-  .hero-p{font-size:14px}
-  .hero-btns{flex-direction:column;align-items:stretch;width:100%;max-width:280px}
-  .hero-stats{gap:20px}
-  .hero-stat-n{font-size:20px}
-}
-.hero-p{font-size:clamp(14px,2.5vw,18px);color:var(--t2);max-width:500px;line-height:1.65;margin-bottom:32px;animation:fadeUp .7s .2s var(--ts) both}
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .3s var(--ts) both}
-.hero-stats{display:flex;gap:32px;margin-top:52px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .4s var(--ts) both}
-.hero-stat-n{font-family:var(--fd);font-size:24px;font-weight:800;color:var(--t1);letter-spacing:-1px}
-.hero-stat-l{font-size:10.5px;color:var(--t3);margin-top:1px;text-transform:uppercase;letter-spacing:.5px}
-
-/* Scroll strip */
-.scroll-strip{width:100%;overflow:hidden;padding:14px 0;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent)}
-.scroll-track{display:flex;gap:13px;animation:scrollX 28s linear infinite;width:max-content}
-.scroll-track:hover{animation-play-state:paused}
-.scroll-card{width:185px;flex-shrink:0;background:var(--sur);border:1.5px solid var(--b1);border-radius:13px;overflow:hidden}
-.sm-img{width:100%;height:105px;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:32px}
-.sm-body{padding:9px 11px}
-.sm-name{font-size:11.5px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sm-cat{font-size:9.5px;color:var(--t3);margin-top:1px}
-.sm-stat{font-size:9.5px;color:var(--brand);font-weight:700;margin-top:4px}
-
-/* Sections */
-.section{padding:66px var(--pad);max-width:1120px;margin:0 auto}
-.sec-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--brand);margin-bottom:10px}
-.sec-h2{font-family:var(--fd);font-size:clamp(24px,5vw,42px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--t1);margin-bottom:10px}
-.sec-p{font-size:14.5px;color:var(--t2);max-width:460px;line-height:1.65;margin-bottom:40px}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:13px}
-.feat-card{background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);padding:24px;transition:all var(--tm);position:relative;overflow:hidden}
-.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--brand),transparent);opacity:0;transition:opacity var(--tm)}
-.feat-card:hover{border-color:var(--b2);transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.feat-card:hover::after{opacity:1}
-.feat-ico{font-size:28px;margin-bottom:13px;display:inline-block;animation:float 4s ease-in-out infinite}
-.feat-title{font-family:var(--fd);font-size:16px;font-weight:700;color:var(--t1);margin-bottom:6px}
-.feat-desc{font-size:12.5px;color:var(--t2);line-height:1.6}
-
-/* Pricing */
-.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;margin-top:28px}
-.price-card{background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);padding:20px;position:relative;transition:all var(--tm)}
-.price-card.pop{border-color:rgba(245,158,11,.4);background:linear-gradient(160deg,rgba(245,158,11,.05),var(--sur))}
-.price-card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
-.pop-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--gold),var(--gold-l));color:#000;font-size:9px;font-weight:800;padding:2px 12px;border-radius:0 0 9px 9px;text-transform:uppercase;letter-spacing:.5px}
-.price-name{font-family:var(--fd);font-size:17px;font-weight:800;color:var(--t1);margin-bottom:3px}
-.price-amt{font-family:var(--fd);font-size:24px;font-weight:800;color:var(--t1);letter-spacing:-1px}
-.price-per{font-size:11px;color:var(--t3)}
-.price-feats{display:flex;flex-direction:column;gap:6px;margin:14px 0;font-size:12px;color:var(--t2)}
-.price-feat{display:flex;align-items:center;gap:6px}
-.price-ck{color:var(--brand);font-size:10.5px;font-weight:800;flex-shrink:0}
-
-/* Annual toggle */
-.annual-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px;font-size:13px;color:var(--t2)}
-.annual-save{background:rgba(22,163,74,.12);color:var(--brand);font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:8px}
-
-/* ═══ DISCOVER ═══ */
-.discover-top{padding:calc(var(--nav-h) + 20px) var(--pad) 14px;background:linear-gradient(160deg,rgba(22,163,74,.06),transparent 55%)}
-.page-title{font-family:var(--fd);font-size:25px;font-weight:800;letter-spacing:-.7px;color:var(--t1)}
-.page-sub{font-size:12.5px;color:var(--t2);margin-top:2px;margin-bottom:16px}
-.search-bar{display:flex;align-items:center;gap:9px;background:var(--sur);border:1.5px solid var(--b1);border-radius:13px;padding:0 13px;height:46px;transition:all var(--tf)}
-.search-bar:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px var(--glow)}
-.search-bar input{flex:1;background:none;border:none;outline:none;font-size:13.5px;color:var(--t1)}
-.search-bar input::placeholder{color:var(--t4)}
-.search-ico{font-size:15px;color:var(--t3);flex-shrink:0}
-.stores-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;padding:0 var(--pad) 18px}
-.sec-head{display:flex;align-items:center;justify-content:space-between;padding:3px var(--pad) 9px}
-.sec-head-t{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3)}
-.sec-head-l{font-size:11.5px;color:var(--brand);font-weight:700}
-
-/* ═══ THE RACK ═══ */
-.rack-top{padding:calc(var(--nav-h) + 20px) var(--pad) 20px;background:linear-gradient(160deg,rgba(245,158,11,.07),transparent 55%);text-align:center;position:relative;overflow:hidden}
-.rack-top::after{content:'👑';position:absolute;font-size:160px;opacity:.025;top:-10px;right:-20px;pointer-events:none}
-.rack-badge-gold{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.28);border-radius:20px;padding:4px 13px;font-size:10.5px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:9px}
-.rack-h1{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px}
-.rack-p{font-size:12.5px;color:var(--t2)}
-.rack-tabs{display:flex;padding:12px var(--pad);overflow-x:auto;scrollbar-width:none;border-bottom:1.5px solid var(--b1)}
-.rack-tabs::-webkit-scrollbar{display:none}
-.rack-tab{padding:7px 16px;font-size:12.5px;font-weight:600;color:var(--t3);border-bottom:2.5px solid transparent;white-space:nowrap;cursor:pointer;transition:all var(--tf)}
-.rack-tab.act{color:var(--gold);border-bottom-color:var(--gold)}
-.rack-champ{margin:13px var(--pad);padding:18px;background:var(--sur);border:1.5px solid rgba(245,158,11,.28);border-radius:var(--r);position:relative;overflow:hidden}
-.rack-champ::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.rack-champ-lbl{font-size:9.5px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:11px}
-.rack-champ-row{display:flex;align-items:center;gap:13px}
-.rack-champ-av{width:50px;height:50px;border-radius:13px;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:24px;border:2px solid rgba(245,158,11,.25);flex-shrink:0}
-.rack-champ-name{font-family:var(--fd);font-size:17px;font-weight:800;color:var(--t1)}
-.rack-champ-sub{font-size:10.5px;color:var(--t3);margin-top:1px}
-.rack-champ-prize{font-size:10.5px;color:var(--gold);font-weight:600;margin-top:5px}
-.rack-num{font-family:var(--fd);font-size:22px;font-weight:800;color:var(--gold);margin-left:auto;text-align:right}
-.rack-num-l{font-size:8.5px;color:var(--t3);text-align:right}
-.rack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;padding:0 var(--pad)}
-.rack-item{background:var(--sur);border:1.5px solid rgba(245,158,11,.1);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all var(--tm);position:relative}
-.rack-item:hover{border-color:rgba(245,158,11,.28);transform:translateY(-3px);box-shadow:var(--sh-lg)}
-.rack-rank{position:absolute;top:6px;left:6px;width:22px;height:22px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:var(--gold-l)}
-.rack-img{width:100%;height:98px;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:32px}
-.rack-body{padding:9px 11px}
-.rack-name{font-size:11.5px;font-weight:700;color:var(--t1)}
-.rack-stat{font-size:9.5px;color:var(--gold);font-weight:600;margin-top:3px}
-
-/* ═══ CREATE ═══ */
-.create-top{padding:calc(var(--nav-h) + 20px) var(--pad) 0}
-.create-h1{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;color:var(--t1)}
-.create-sub{font-size:12.5px;color:var(--t2);margin-top:3px;margin-bottom:20px}
-.prog-row{display:flex;align-items:center;gap:4px;margin-bottom:22px}
-.prog-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;flex-shrink:0;transition:all var(--tm)}
-.prog-dot.done{background:var(--brand);color:#fff}
-.prog-dot.cur{background:var(--brand);color:#fff;box-shadow:0 0 0 4px var(--glow)}
-.prog-dot.pend{background:var(--sur2);color:var(--t3);border:1.5px solid var(--b1)}
-.prog-line{flex:1;height:2px;background:var(--sur3);border-radius:1px;transition:background var(--tm)}
-.prog-line.done{background:var(--brand)}
-.fmt-list{display:flex;flex-direction:column;gap:8px}
-.fmt-item{display:flex;align-items:center;gap:13px;padding:13px;background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);cursor:pointer;transition:all var(--tf);text-align:left}
-.fmt-item:hover{border-color:var(--b2);background:var(--sur2)}
-.fmt-item.sel{border-color:var(--brand);background:var(--glow)}
-.fmt-ico{width:40px;height:40px;border-radius:11px;background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
-.fmt-name{font-size:13.5px;font-weight:700;color:var(--t1)}
-.fmt-desc{font-size:11.5px;color:var(--t3);margin-top:1px}
-.fmt-range{font-size:10.5px;color:var(--t3);font-weight:600;margin-left:auto;flex-shrink:0}
-.tmpl-item{display:flex;align-items:center;gap:11px;padding:13px;background:var(--sur);border:2px solid var(--b1);border-radius:var(--r);cursor:pointer;transition:all var(--tf);width:100%;text-align:left}
-.tmpl-item:hover{border-color:var(--b2);box-shadow:var(--sh)}
-.tmpl-item.sel{border-color:var(--brand);box-shadow:0 0 0 3px var(--glow)}
-.tmpl-swatch{width:46px;height:46px;border-radius:11px;flex-shrink:0;border:2px solid rgba(0,0,0,.09)}
-.tmpl-name{font-size:13.5px;font-weight:700;color:var(--t1)}
-.tmpl-desc{font-size:11.5px;color:var(--t3);margin-top:1px}
-.prods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
-.share-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.share-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:13px;background:var(--sur2);border:1.5px solid var(--b1);border-radius:var(--r);font-size:11.5px;font-weight:600;color:var(--t2);cursor:pointer;transition:all var(--tf)}
-.share-btn:hover{background:var(--sur3);color:var(--t1);border-color:var(--b2)}
-.share-btn-ico{font-size:20px}
-.share-btn.locked{opacity:.5;position:relative}
-.share-btn.locked::after{content:'🔒';position:absolute;top:6px;right:6px;font-size:10px}
-
-/* ═══ HOME ═══ */
-.home-top{padding:calc(var(--nav-h) + 18px) var(--pad) 18px;background:linear-gradient(160deg,rgba(22,163,74,.07),transparent 50%)}
-.greet{font-size:11px;color:var(--t3);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
-.home-sname{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--t1)}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.stat-pill{background:var(--sur);border:1.5px solid var(--b1);border-radius:13px;padding:11px;text-align:center;transition:all var(--tf)}
-.stat-pill:hover{border-color:var(--b2)}
-.stat-n{font-family:var(--fd);font-size:20px;font-weight:800;color:var(--t1)}
-.stat-l{font-size:8.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:1px}
-.qa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.qa-btn{background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);padding:14px;text-align:left;display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:all var(--tf)}
-.qa-btn:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:var(--sh)}
-.qa-btn:active{transform:scale(.97)}
-.qa-ico{font-size:22px}
-.qa-lbl{font-size:12.5px;font-weight:700;color:var(--t1)}
-
-/* ═══ STORE ═══ */
-.store-top{padding:calc(var(--nav-h) + 18px) var(--pad) 18px;background:linear-gradient(160deg,rgba(22,163,74,.06),transparent 50%)}
-.store-row{display:flex;align-items:flex-start;gap:13px}
-.store-av{width:60px;height:60px;border-radius:17px;background:linear-gradient(135deg,var(--brand-d),var(--brand));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:22px;color:#fff;flex-shrink:0;border:2.5px solid rgba(22,163,74,.22)}
-.store-title{font-family:var(--fd);font-size:21px;font-weight:800;letter-spacing:-.5px;color:var(--t1)}
-.store-cat-lbl{font-size:11.5px;color:var(--t3);margin-top:1px}
-.live-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 13px;background:var(--sur2);border:1.5px solid var(--b1);border-radius:13px}
-.live-label{font-size:12.5px;font-weight:700;color:var(--t1)}
-.live-sub{font-size:10.5px;color:var(--t3);margin-top:1px}
-.link-row{display:flex;gap:7px;margin-top:9px;align-items:center}
-.link-display{flex:1;background:var(--sur2);border:1.5px solid var(--b1);border-radius:9px;padding:9px 12px;font-size:11.5px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* Social links section */
-.social-links-wrap{margin-top:13px;padding:14px;background:var(--sur2);border:1.5px solid var(--b1);border-radius:13px}
-.social-links-title{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.social-links-row{display:flex;gap:9px;flex-wrap:wrap}
-.social-link-btn{
-  display:flex;align-items:center;gap:6px;
-  padding:7px 13px;border-radius:20px;
-  font-size:12px;font-weight:600;
-  border:1.5px solid var(--b1);background:var(--sur);
-  color:var(--t2);transition:all var(--tf);cursor:pointer;
-}
-.social-link-btn:hover{border-color:var(--b2);color:var(--t1)}
-.social-link-btn.has-link{border-color:var(--brand);color:var(--brand);background:var(--glow)}
-
-/* ═══ ACCOUNT ═══ */
-.acct-top{padding:calc(var(--nav-h) + 18px) var(--pad) 0}
-.plan-card{background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);padding:17px;margin:0 var(--pad) 13px}
-.plan-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px}
-.plan-name-t{font-family:var(--fd);font-size:16px;font-weight:800;color:var(--t1)}
-.plan-badge{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px}
-.pb-free{background:var(--sur2);color:var(--t3);border:1.5px solid var(--b1)}
-.pb-paid{background:rgba(22,163,74,.11);color:var(--brand);border:1.5px solid rgba(22,163,74,.28)}
-.pb-admin{background:var(--admin-glow);color:var(--admin-l);border:1.5px solid rgba(124,58,237,.28)}
-.usage-bar-row{margin-bottom:6px}
-.usage-bar-lbl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--t3);margin-bottom:4px}
-.usage-bar-track{height:3.5px;background:var(--sur3);border-radius:2px;overflow:hidden}
-.usage-bar-fill{height:100%;background:var(--brand);border-radius:2px;transition:width .8s var(--ts)}
-.menu-list{margin:0 var(--pad);display:flex;flex-direction:column;gap:6px}
-.menu-item{display:flex;align-items:center;gap:11px;padding:12px 13px;background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);cursor:pointer;transition:all var(--tf);text-align:left;width:100%}
-.menu-item:hover{background:var(--sur2);border-color:var(--b2)}
-.mi-ico{font-size:17px;flex-shrink:0;width:20px;text-align:center}
-.mi-txt{flex:1;font-size:13.5px;font-weight:500;color:var(--t1)}
-.mi-arr{font-size:11.5px;color:var(--t3)}
-
-/* ═══ PLANS ═══ */
-.plans-top{padding:calc(var(--nav-h) + 20px) var(--pad) 0}
-.plans-stack{display:flex;flex-direction:column;gap:11px;margin-top:20px}
-.plan-tier{background:var(--sur);border:1.5px solid var(--b1);border-radius:var(--r);padding:19px;position:relative;transition:all var(--tm)}
-.plan-tier:hover{border-color:var(--b2)}
-.plan-tier.pop{border-color:rgba(245,158,11,.38);background:linear-gradient(160deg,rgba(245,158,11,.05),var(--sur))}
-.plan-tier.cur{border-color:rgba(22,163,74,.38)}
-.plan-pop-tag{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--gold),var(--gold-l));color:#000;font-size:8.5px;font-weight:800;padding:2px 11px;border-radius:0 0 8px 8px;text-transform:uppercase;letter-spacing:.5px}
-.plan-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px}
-.plan-tier-name{font-family:var(--fd);font-size:18px;font-weight:800;color:var(--t1)}
-.plan-price{text-align:right}
-.plan-amt{font-family:var(--fd);font-size:22px;font-weight:800;color:var(--t1);letter-spacing:-.5px}
-.plan-per{font-size:10.5px;color:var(--t3)}
-.plan-feats{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.plan-feat{display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--t2);line-height:1.4}
-.plan-feat-ck{color:var(--brand);font-size:10.5px;font-weight:800;flex-shrink:0;margin-top:2px}
-
-/* ═══ ADD PRODUCT ═══ */
-.add-prod-top{padding:calc(var(--nav-h) + 16px) var(--pad) 18px}
-.img-upload{width:100%;border:2px dashed var(--b2);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all var(--tf)}
-.img-upload:hover{border-color:var(--brand);background:rgba(22,163,74,.04)}
-.img-ph{padding:30px;text-align:center}
-.img-ph-ico{font-size:34px;opacity:.32;margin-bottom:7px}
-.img-ph-t{font-size:12.5px;color:var(--t3)}
-.img-ph-h{font-size:10.5px;color:var(--t4);margin-top:2px}
-.img-upload input[type=file]{display:none}
-.img-upload img{width:100%;height:185px;object-fit:cover}
-
-/* ═══ PRODUCTS ═══ */
-.prods-top{padding:calc(var(--nav-h) + 18px) var(--pad) 13px}
-
-/* ═══ ONBOARDING ═══ */
-.onboard{position:fixed;inset:0;z-index:400;background:var(--bg);display:flex;flex-direction:column;padding:52px var(--pad) 32px;overflow-y:auto}
-.onboard.hide{display:none}
-.ob-step{display:none;flex-direction:column;min-height:calc(100vh - 84px)}
-.ob-step.act{display:flex;animation:fadeUp 320ms var(--ts) both}
-.ob-logo{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,var(--brand-d),var(--brand));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:26px;color:#fff;margin:0 auto 14px;box-shadow:0 11px 36px var(--glow)}
-.ob-title{font-family:var(--fd);font-size:26px;font-weight:800;letter-spacing:-.5px;text-align:center;color:var(--t1);margin-bottom:6px}
-.ob-sub{font-size:14px;color:var(--t2);text-align:center;line-height:1.55;margin-bottom:26px}
-.ob-dots{display:flex;justify-content:center;gap:5px;margin:14px 0}
-.ob-dot{width:5px;height:5px;border-radius:3px;background:var(--sur3);transition:all var(--tm)}
-.ob-dot.act{width:18px;background:var(--brand)}
-
-/* ═══ MISC ═══ */
-.divider{height:1px;background:var(--b1);margin:12px 0}
-.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--t2);padding:5px 10px;border-radius:8px;border:1.5px solid var(--b1);background:var(--sur);cursor:pointer;transition:all var(--tf);margin-bottom:16px}
-.back-btn:hover{color:var(--t1);border-color:var(--b2)}
-.empty{padding:44px var(--pad);text-align:center}
-.empty-ico{font-size:42px;opacity:.28;margin-bottom:10px}
-.empty-t{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px}
-.empty-s{font-size:12px;color:var(--t3)}
-.footer-c{text-align:center;padding:24px var(--pad) 36px;font-size:10.5px;color:var(--t3)}
-
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:768px){
-  .nav-links,.nav-cta{display:none}
-  .nav-live{display:none}
-  .bnav{display:block}
-  .page{padding-bottom:70px}
-  .stores-grid,.rack-grid{grid-template-columns:repeat(2,1fr)}
-  .prods-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(min-width:769px){
-  .nav-burger{display:none}
-  .page{max-width:1200px;margin:0 auto}
-  .stores-grid{grid-template-columns:repeat(auto-fill,minmax(185px,1fr))}
-}
-</style>
-</head>
-<body>
-
-<!-- ═══ ADMIN BANNER ═══ -->
-<div class="admin-banner hide" id="adminBanner">
-  <div class="admin-badge">
-    <div class="admin-dot"></div>
-    <span>⚡ ADMIN MODE — Local Rack v5 Testing</span>
-  </div>
-  <div class="admin-actions">
-    <button class="admin-action-btn" onclick="switchPlan()">Switch Plan</button>
-    <button class="admin-action-btn" onclick="resetWeekly()">Reset Weekly</button>
-    <button class="admin-action-btn" onclick="toggleTheme()">Theme</button>
-  </div>
-</div>
-
-<!-- ═══ NAV ═══ -->
-<nav class="nav" id="nav">
-  <div class="nav-logo" onclick="go('landing')">
-    <div class="nav-mark">LR</div>
-    <span class="nav-name">Local Rack</span>
-  </div>
-  <div class="nav-live" id="navLive"><div class="live-dot"></div><span id="liveCnt">1,247</span> online</div>
-  <div class="nav-links" id="navGuest">
-    <button class="nav-link" onclick="go('discover')">Discover</button>
-    <button class="nav-link" onclick="go('rack')">The Rack 👑</button>
-    <button class="nav-cta" onclick="showAuth('signup')">Get Started</button>
-    <button class="nav-link" onclick="showAuth('login')">Sign In</button>
-  </div>
-  <div class="nav-links hide" id="navUser">
-    <button class="nav-link" onclick="go('discover')">Discover</button>
-    <button class="nav-link" onclick="go('rack')">The Rack 👑</button>
-    <button class="nav-cta" onclick="go('create')">+ Create</button>
-  </div>
-  <button class="nav-burger" onclick="openBurger()">☰</button>
-</nav>
-
-<!-- ═══ BURGER ═══ -->
-<div class="burger-ov" id="burgerOv" onclick="closeBurger()"></div>
-<div class="burger-drawer" id="burgerDrawer">
-  <div id="dGuest">
-    <div class="dh"><div style="font-family:var(--fd);font-size:15px;font-weight:800;color:var(--t1)">Menu</div><button class="dh-close" onclick="closeBurger()">✕</button></div>
-    <div class="db">
-      <div class="ds-title">Navigation</div>
-      <button class="di" onclick="closeBurger();go('landing')"><span class="di-ico">🏠</span><span class="di-txt">Home</span></button>
-      <button class="di" onclick="closeBurger();go('discover')"><span class="di-ico">🔍</span><span class="di-txt">Discover Stores</span></button>
-      <button class="di" onclick="closeBurger();go('rack')"><span class="di-ico">👑</span><span class="di-txt">The Rack</span></button>
-      <div class="dd"></div>
-      <div class="ds-title">Account</div>
-      <button class="di" onclick="closeBurger();showAuth('signup')"><span class="di-ico">🚀</span><span class="di-txt">Get Started</span><span class="di-badge">Free</span></button>
-      <button class="di" onclick="closeBurger();showAuth('login')"><span class="di-ico">🔑</span><span class="di-txt">Sign In</span></button>
-      <div class="dd"></div>
-      <div class="theme-row"><span style="font-size:17px">🌙</span><span style="font-size:13.5px;font-weight:500;color:var(--t1);flex:1;margin-left:10px">Theme</span><div class="theme-pill"><div class="th-opt act" id="thL" onclick="setTheme('light')">☀️ Light</div><div class="th-opt" id="thD" onclick="setTheme('dark')">🌙 Dark</div></div></div>
-    </div>
-  </div>
-  <div id="dUser" class="hide">
-    <div class="dh">
-      <div class="dh-user"><div class="dh-av" id="dAv">M</div><div><div class="dh-name" id="dName">Mbuso</div><div class="dh-email" id="dEmail">user@email.com</div></div></div>
-      <button class="dh-close" onclick="closeBurger()">✕</button>
-    </div>
-    <div class="db">
-      <div class="ds-title">My Store</div>
-      <button class="di" onclick="closeBurger();go('home')"><span class="di-ico">🏠</span><span class="di-txt">Dashboard</span></button>
-      <button class="di" onclick="closeBurger();go('store')"><span class="di-ico">🏪</span><span class="di-txt">My Store</span></button>
-      <button class="di" onclick="closeBurger();go('products')"><span class="di-ico">📦</span><span class="di-txt">My Products</span></button>
-      <button class="di" onclick="closeBurger();go('create')"><span class="di-ico">✨</span><span class="di-txt">Create Flyer</span></button>
-      <div class="dd"></div>
-      <div class="ds-title">Discover</div>
-      <button class="di" onclick="closeBurger();go('discover')"><span class="di-ico">🔍</span><span class="di-txt">Discover Stores</span></button>
-      <button class="di" onclick="closeBurger();go('rack')"><span class="di-ico">👑</span><span class="di-txt">The Rack</span></button>
-      <div class="dd"></div>
-      <div class="ds-title">Settings</div>
-      <button class="di" onclick="closeBurger();go('account')"><span class="di-ico">👤</span><span class="di-txt">Account & Profile</span></button>
-      <button class="di" onclick="closeBurger();go('plans')"><span class="di-ico">⚡</span><span class="di-txt">Upgrade Plan</span><span class="di-badge">R49+</span></button>
-      <button class="di" onclick="showToast('Settings coming soon','ok')"><span class="di-ico">⚙️</span><span class="di-txt">App Settings</span></button>
-      <button class="di" onclick="showToast('support@localrack.app','ok')"><span class="di-ico">❓</span><span class="di-txt">Help & Support</span></button>
-      <button class="di" onclick="showAbout()"><span class="di-ico">ℹ️</span><span class="di-txt">About Local Rack</span></button>
-      <div id="adminMenuItems" class="hide">
-        <div class="dd"></div>
-        <div class="ds-title" style="color:var(--admin-l)">Admin Tools</div>
-        <button class="di" onclick="switchPlan()"><span class="di-ico">🔄</span><span class="di-txt">Switch Plan</span><span class="di-badge adm">Admin</span></button>
-        <button class="di" onclick="resetWeekly()"><span class="di-ico">🔁</span><span class="di-txt">Reset Weekly Limit</span><span class="di-badge adm">Admin</span></button>
-        <button class="di" onclick="addDemoProducts()"><span class="di-ico">📦</span><span class="di-txt">Load Demo Products</span><span class="di-badge adm">Admin</span></button>
-      </div>
-      <div class="dd"></div>
-      <div class="theme-row"><span style="font-size:17px">🌙</span><span style="font-size:13.5px;font-weight:500;color:var(--t1);flex:1;margin-left:10px">Theme</span><div class="theme-pill"><div class="th-opt act" id="thLU" onclick="setTheme('light')">☀️ Light</div><div class="th-opt" id="thDU" onclick="setTheme('dark')">🌙 Dark</div></div></div>
-    </div>
-    <button class="d-logout" onclick="doLogout()">🚪 <span>Sign Out</span></button>
-  </div>
-</div>
-
-<!-- ═══ BOTTOM NAV ═══ -->
-<nav class="bnav" id="bnav">
-  <div class="bnav-inner">
-    <button class="bnav-btn act" id="bn-discover" onclick="go('discover')"><span class="bnav-ico">🔍</span>Discover</button>
-    <button class="bnav-btn" id="bn-rack" onclick="go('rack')"><span class="bnav-ico">👑</span>The Rack</button>
-    <button class="bnav-create" onclick="go('create')">✨</button>
-    <button class="bnav-btn" id="bn-store" onclick="go('store')"><span class="bnav-ico">🏪</span>Store</button>
-    <button class="bnav-btn" id="bn-account" onclick="go('account')"><span class="bnav-ico">👤</span>Account</button>
-  </div>
-</nav>
-
-<div class="toast" id="toast"></div>
-
-<!-- ═══ ONBOARDING ═══ -->
-<div class="onboard hide" id="onboard">
-  <div class="ob-step act" id="ob0">
-    <div style="text-align:center;margin-bottom:auto;padding-top:16px">
-      <div class="ob-logo">LR</div>
-      <div class="ob-title">Welcome to Local Rack</div>
-      <div class="ob-sub">Your products, professionally presented.<br/>Built for South African hustlers.</div>
-      <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px;text-align:left;max-width:340px;margin-left:auto;margin-right:auto">
-        <div style="display:flex;align-items:center;gap:11px;padding:12px;background:var(--sur2);border-radius:12px"><span style="font-size:20px">📦</span><div><div style="font-weight:700;font-size:12.5px;color:var(--t1)">Upload your products</div><div style="font-size:11.5px;color:var(--t3)">Photos, prices, descriptions</div></div></div>
-        <div style="display:flex;align-items:center;gap:11px;padding:12px;background:var(--sur2);border-radius:12px"><span style="font-size:20px">✨</span><div><div style="font-weight:700;font-size:12.5px;color:var(--t1)">Create flyers instantly</div><div style="font-size:11.5px;color:var(--t3)">WhatsApp, Instagram, PDF — all formats</div></div></div>
-        <div style="display:flex;align-items:center;gap:11px;padding:12px;background:var(--sur2);border-radius:12px"><span style="font-size:20px">🌍</span><div><div style="font-weight:700;font-size:12.5px;color:var(--t1)">Get discovered</div><div style="font-size:11.5px;color:var(--t3)">Go live, reach customers near you</div></div></div>
-      </div>
-    </div>
-    <div class="ob-dots"><div class="ob-dot act"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
-    <button class="btn green lg full" onclick="obGo(1)">Get Started — It's Free →</button>
-  </div>
-  <div class="ob-step" id="ob1">
-    <div style="margin-bottom:20px"><div style="font-size:10.5px;color:var(--brand);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Step 1 of 2</div><div class="ob-title" style="text-align:left">Set up your store</div><div style="font-size:12.5px;color:var(--t2);margin-top:2px">How customers will see your business</div></div>
-    <div style="flex:1;overflow-y:auto;padding-bottom:14px">
-      <div class="fg"><label class="fl">Store / Brand Name *</label><input class="fi" id="ob-name" placeholder="e.g. Urban Threadz, Mama's Kitchen"/></div>
-      <div class="fg"><label class="fl">What do you sell?</label><div class="chips" id="ob-cats"></div></div>
-      <div class="fg"><label class="fl">Short Description</label><textarea class="ta" id="ob-desc" rows="2" placeholder="What makes your business special?"></textarea></div>
-      <div class="fg"><label class="fl">Location</label><input class="fi" id="ob-loc" placeholder="e.g. Durban, KZN"/></div>
-      <div class="fg"><label class="fl">WhatsApp / Phone</label><input class="fi" id="ob-phone" placeholder="+27..." type="tel"/></div>
-    </div>
-    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot act"></div><div class="ob-dot"></div></div>
-    <div style="display:flex;gap:9px;margin-top:11px">
-      <button class="btn ghost md" onclick="obGo(0)">← Back</button>
-      <button class="btn green lg" style="flex:1" onclick="obGo(2)">Continue →</button>
-    </div>
-  </div>
-  <div class="ob-step" id="ob2">
-    <div style="margin:auto;text-align:center">
-      <div style="font-size:60px;margin-bottom:16px;animation:float 3s ease-in-out infinite">🚀</div>
-      <div class="ob-title">You're all set!</div>
-      <div style="font-size:14px;color:var(--t2);margin-top:6px;margin-bottom:28px;line-height:1.55">Your store is ready. Start adding<br/>products and create your first flyer.</div>
-      <button class="btn green lg full" onclick="finishOnboard()">Launch My Store 🎉</button>
-    </div>
-    <div class="ob-dots" style="margin-top:22px"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot act"></div></div>
-  </div>
-</div>
-
-<!-- ═══ AUTH MODAL ═══ -->
-<div class="overlay hide" id="authModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div id="loginF">
-      <div class="sheet-title">Welcome back 👋</div>
-      <div class="sheet-sub">Sign in to manage your store</div>
-      <div class="fg"><label class="fl">Email</label><input class="fi" id="liEmail" type="email" placeholder="you@example.com"/></div>
-      <div class="fg"><label class="fl">Password</label><div class="fi-wrap"><input class="fi" id="liPass" type="password" placeholder="••••••••"/><button class="fi-eye" onclick="togglePw('liPass','liEye')" id="liEye">👁</button></div></div>
-      <button class="btn green lg full" onclick="doLogin()" style="margin-top:5px">Sign In</button>
-      <div style="text-align:center;margin-top:12px;font-size:12.5px;color:var(--t3)">Don't have an account? <button onclick="swAuth('signup')" style="color:var(--brand);font-weight:700;background:none;border:none;cursor:pointer">Sign Up</button></div>
-      <div class="divider"></div>
-      <button class="btn ghost md full" onclick="demoLogin()">👀 Try Demo Account</button>
-    </div>
-    <div id="signupF" class="hide">
-      <div class="sheet-title">Create account</div>
-      <div class="sheet-sub">Start building your catalog today — free forever</div>
-      <div class="fg"><label class="fl">Full Name</label><input class="fi" id="suName" placeholder="Your full name"/></div>
-      <div class="fg"><label class="fl">Email</label><input class="fi" id="suEmail" type="email" placeholder="you@example.com"/></div>
-      <div class="fg"><label class="fl">Password</label><div class="fi-wrap"><input class="fi" id="suPass" type="password" placeholder="Minimum 8 characters"/><button class="fi-eye" onclick="togglePw('suPass','suEye')" id="suEye">👁</button></div></div>
-      <div class="fg"><label class="fl">Confirm Password</label><div class="fi-wrap"><input class="fi" id="suPass2" type="password" placeholder="Repeat password"/><button class="fi-eye" onclick="togglePw('suPass2','suEye2')" id="suEye2">👁</button></div></div>
-      <button class="btn green lg full" onclick="doSignup()" style="margin-top:5px">Create Account</button>
-      <div style="text-align:center;margin-top:12px;font-size:12.5px;color:var(--t3)">Already have an account? <button onclick="swAuth('login')" style="color:var(--brand);font-weight:700;background:none;border:none;cursor:pointer">Sign In</button></div>
-    </div>
-    <button class="btn ghost sm full" onclick="closeAuth()" style="margin-top:9px">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ EDIT STORE MODAL ═══ -->
-<div class="overlay hide" id="editStoreModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">Edit Store</div>
-    <div class="sheet-sub">Update your business details</div>
-    <div class="fg"><label class="fl">Store Name *</label><input class="fi" id="es-name" placeholder="Your store name"/></div>
-    <div class="fg"><label class="fl">Category</label><div class="chips" id="es-cats"></div></div>
-    <div class="fg"><label class="fl">Description</label><textarea class="ta" id="es-desc" rows="2" placeholder="What do you sell?"></textarea></div>
-    <div class="fg"><label class="fl">Location</label><input class="fi" id="es-loc" placeholder="e.g. Durban, KZN"/></div>
-    <div class="fg"><label class="fl">Phone / WhatsApp</label><input class="fi" id="es-phone" placeholder="+27..." type="tel"/></div>
-    <div class="fg"><label class="fl">Instagram</label><div style="position:relative"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px">📸</span><input class="fi" id="es-ig" placeholder="@yourhandle" style="padding-left:36px"/></div></div>
-    <div class="fg"><label class="fl">WhatsApp Business</label><div style="position:relative"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px">💬</span><input class="fi" id="es-wa" placeholder="+27..." type="tel" style="padding-left:36px"/></div></div>
-    <div class="fg"><label class="fl">Facebook Page</label><div style="position:relative"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px">👥</span><input class="fi" id="es-fb" placeholder="facebook.com/yourpage" style="padding-left:36px"/></div></div>
-    <div class="fg"><label class="fl">TikTok</label><div style="position:relative"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px">🎵</span><input class="fi" id="es-tt" placeholder="@yourtiktok" style="padding-left:36px"/></div></div>
-    <button class="btn green lg full" onclick="saveStore()" style="margin-top:7px">Save Changes ✓</button>
-    <button class="btn ghost sm full" onclick="qs('editStoreModal').classList.add('hide')" style="margin-top:7px">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ ABOUT MODAL ═══ -->
-<div class="overlay hide" id="aboutModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div style="text-align:center;margin-bottom:18px">
-      <div class="ob-logo" style="width:56px;height:56px;font-size:20px;margin-bottom:12px">LR</div>
-      <div class="sheet-title">Local Rack</div>
-      <div style="font-size:12px;color:var(--t3);margin-top:3px">Version 5.0 · 2026</div>
-    </div>
-    <div style="font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:16px">Local Rack is a digital catalog and storefront platform built for South African hustlers, spaza shops, hair salons, and businesses of all sizes. Create professional flyers, manage your products, and get discovered by thousands of customers.</div>
-    <div style="font-size:11.5px;color:var(--t3);text-align:center;margin-bottom:14px">A product of <strong style="color:var(--t1)">InkAiron Studios</strong><br/>Built by Mbuso Cele (Jobbz) © 2026</div>
-    <button class="btn ghost md full" onclick="qs('aboutModal').classList.add('hide')">Close</button>
-  </div>
-</div>
-
-<!-- ═══ ADMIN SWITCH PLAN MODAL ═══ -->
-<div class="overlay hide" id="adminPlanModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title" style="color:var(--admin-l)">⚡ Admin: Switch Plan</div>
-    <div class="sheet-sub">Testing only — simulates different subscription tiers</div>
-    <div style="display:flex;flex-direction:column;gap:8px" id="adminPlanList"></div>
-    <button class="btn ghost sm full" onclick="qs('adminPlanModal').classList.add('hide')" style="margin-top:9px">Close</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     PAGES
-     ═══════════════════════════════════════════════════════ -->
-
-<!-- LANDING -->
-<div class="page act" id="page-landing">
-  <div class="hero">
-    <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
-    <div class="hero-badge"><div class="live-dot"></div>South Africa's Hustle Platform</div>
-    <h1 class="hero-h1">Your hustle,<br/><span>professionally</span><br/>presented.</h1>
-    <p class="hero-p">Create stunning product catalogs, flyers, and digital storefronts in minutes. Built for South African hustlers, spaza shops, salons, and businesses.</p>
-    <div class="hero-btns">
-      <button class="btn green lg" onclick="showAuth('signup')">Start for Free →</button>
-      <button class="btn ghost lg" onclick="go('discover')">Browse Stores</button>
-    </div>
-    <div class="hero-stats">
-      <div style="text-align:center"><div class="hero-stat-n" id="hs1">2,847</div><div class="hero-stat-l">Active Stores</div></div>
-      <div style="text-align:center"><div class="hero-stat-n" id="hs2">18,293</div><div class="hero-stat-l">Flyers Created</div></div>
-      <div style="text-align:center"><div class="hero-stat-n" id="hs3">94,721</div><div class="hero-stat-l">Total Views</div></div>
-    </div>
-  </div>
-  <div class="scroll-strip"><div class="scroll-track" id="scrollTrack"></div></div>
-  <div class="section">
-    <div class="sec-lbl">Why Local Rack?</div>
-    <h2 class="sec-h2">Everything your<br/>business needs</h2>
-    <p class="sec-p">From your first WhatsApp flyer to your 1000th order — we've got you covered.</p>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-ico">📸</div><div class="feat-title">Upload & Sell</div><div class="feat-desc">Upload product photos from your phone. Add prices, descriptions, and stock status in seconds.</div></div>
-      <div class="feat-card"><div class="feat-ico">✨</div><div class="feat-title">Instant Flyers</div><div class="feat-desc">WhatsApp, Instagram, A4 print, PDF catalogs. Professional templates that make your products pop.</div></div>
-      <div class="feat-card"><div class="feat-ico">📅</div><div class="feat-title">Scheduled Releases</div><div class="feat-desc">Set your Monday specials to drop automatically. Plan a week's content in one sitting.</div></div>
-      <div class="feat-card"><div class="feat-ico">🌍</div><div class="feat-title">Get Discovered</div><div class="feat-desc">Go live and appear in the discovery feed. Customers near you find your catalog.</div></div>
-      <div class="feat-card"><div class="feat-ico">👑</div><div class="feat-title">The Rack</div><div class="feat-desc">Premium ad space. Boost your catalog to the top. Monthly #1 earns a free subscription.</div></div>
-      <div class="feat-card"><div class="feat-ico">📊</div><div class="feat-title">Analytics</div><div class="feat-desc">See who's viewing, which products get likes, and track your store growth over time.</div></div>
-    </div>
-  </div>
-  <!-- Pricing -->
-  <div style="background:var(--sur2);padding:56px 0">
-    <div class="section" style="padding-top:0;padding-bottom:0">
-      <div class="sec-lbl">Pricing</div>
-      <h2 class="sec-h2">Scale your hustle</h2>
-      <p class="sec-p">Start free. Upgrade when ready. All prices in South African Rand.</p>
-      <div class="annual-row">
-        <span>Monthly</span>
-        <label class="toggle" style="width:36px;height:20px"><input type="checkbox" id="annualToggle" onchange="toggleAnnual()"/><div class="tslider"></div></label>
-        <span>Annual</span>
-        <span class="annual-save">2 months free</span>
-      </div>
-      <div class="price-grid" id="landingPriceGrid"></div>
-    </div>
-  </div>
-  <div class="footer-c">Local Rack is a product of <strong>InkAiron Studios</strong> · Built by Mbuso Cele (Jobbz) © 2026<br/><span style="margin-top:3px;display:block"><a href="#" style="color:var(--t3)">Privacy Policy</a> · <a href="#" style="color:var(--t3)">Terms of Service</a></span></div>
-</div>
-
-<!-- DISCOVER -->
-<div class="page app-shell" id="page-discover">
-  <div class="discover-top">
-    <div class="page-title">Discover Stores 🔍</div>
-    <div class="page-sub">Browse catalogs from businesses near you</div>
-    <div class="search-bar"><span class="search-ico">🔍</span><input type="search" placeholder="Search stores, products, categories..." id="searchIn" oninput="filterStores()"/></div>
-  </div>
-  <div class="chips-row" id="catChips"></div>
-  <div class="sec-head"><span class="sec-head-t">All Stores</span><span class="sec-head-l" id="storeCnt">0 stores</span></div>
-  <div class="stores-grid" id="storesGrid"></div>
-</div>
-
-<!-- HOME (auth) -->
-<div class="page app-shell hide" id="page-home">
-  <div class="home-top">
-    <div class="greet">Welcome back</div>
-    <div class="home-sname" id="hName">Your Store</div>
-    <div class="stats-row">
-      <div class="stat-pill"><div class="stat-n" id="hProds">0</div><div class="stat-l">Products</div></div>
-      <div class="stat-pill"><div class="stat-n" id="hViews">0</div><div class="stat-l">Views</div></div>
-      <div class="stat-pill"><div class="stat-n" id="hLikes">0</div><div class="stat-l">Likes</div></div>
-    </div>
-  </div>
-  <!-- Weekly usage indicator -->
-  <div style="padding:14px var(--pad) 0" id="weeklyUsageHome"></div>
-  <div style="padding:4px var(--pad) 8px">
-    <div class="sec-head" style="padding:0 0 9px"><span class="sec-head-t">Quick Actions</span></div>
-    <div class="qa-grid">
-      <button class="qa-btn" onclick="go('add-product')"><span class="qa-ico">➕</span><span class="qa-lbl">Add Product</span></button>
-      <button class="qa-btn" onclick="go('create')"><span class="qa-ico">✨</span><span class="qa-lbl">Create Flyer</span></button>
-      <button class="qa-btn" onclick="go('store')"><span class="qa-ico">🏪</span><span class="qa-lbl">My Store</span></button>
-      <button class="qa-btn" onclick="go('plans')"><span class="qa-ico">⚡</span><span class="qa-lbl">Upgrade Plan</span></button>
-    </div>
-  </div>
-  <div style="padding:4px var(--pad) 0">
-    <div class="sec-head" style="padding:0 0 9px"><span class="sec-head-t">Recent Products</span><button class="sec-head-l" onclick="go('products')">View All →</button></div>
-    <div class="prods-grid" id="hProdsGrid"></div>
-  </div>
-</div>
-
-<!-- THE RACK -->
-<div class="page app-shell" id="page-rack">
-  <div class="rack-top">
-    <div class="rack-badge-gold">👑 Premium Space</div>
-    <div class="rack-h1">Top of the Shelf</div>
-    <div class="rack-p">South Africa's most viewed catalogs this month</div>
-  </div>
-  <div class="rack-tabs">
-    <div class="rack-tab act" onclick="rackTab('trending',this)">🔥 Trending</div>
-    <div class="rack-tab" onclick="rackTab('boosted',this)">⚡ Boosted</div>
-    <div class="rack-tab" onclick="rackTab('fashion',this)">👗 Fashion</div>
-    <div class="rack-tab" onclick="rackTab('food',this)">🍔 Food</div>
-    <div class="rack-tab" onclick="rackTab('beauty',this)">💄 Beauty</div>
-    <div class="rack-tab" onclick="rackTab('electronics',this)">📱 Electronics</div>
-  </div>
-  <div class="rack-champ">
-    <div class="rack-champ-lbl">👑 #1 This Month</div>
-    <div class="rack-champ-row">
-      <div class="rack-champ-av">👗</div>
-      <div style="flex:1"><div class="rack-champ-name">Zara's Closet</div><div class="rack-champ-sub">Fashion · Johannesburg</div><div class="rack-champ-prize">🎁 Leading for a free month's subscription</div></div>
-      <div><div class="rack-num">14,821</div><div class="rack-num-l">VIEWS</div></div>
-    </div>
-  </div>
-  <div class="rack-grid" id="rackGrid"></div>
-  <div style="margin:16px var(--pad);padding:18px;background:var(--sur);border:1.5px solid rgba(245,158,11,.18);border-radius:var(--r);text-align:center">
-    <div style="font-size:24px;margin-bottom:7px">⚡</div>
-    <div style="font-family:var(--fd);font-size:15px;font-weight:800;color:var(--t1);margin-bottom:5px">Boost Your Store</div>
-    <div style="font-size:12.5px;color:var(--t2);margin-bottom:13px">Get on The Rack and reach thousands of new customers every day.</div>
-    <button class="btn gold md" onclick="showToast('Boost — connect PayFast to activate','ok')">Boost from R99 →</button>
-  </div>
-</div>
-
-<!-- CREATE -->
-<div class="page app-shell" id="page-create">
-  <div class="create-top">
-    <div class="create-h1">Create Flyer ✨</div>
-    <div class="create-sub">Follow the steps — takes under 2 minutes</div>
-    <!-- Weekly limit pill -->
-    <div id="createUsagePill"></div>
-    <div class="prog-row" id="progRow">
-      <div class="prog-dot cur" id="pd1">1</div><div class="prog-line" id="pl1"></div>
-      <div class="prog-dot pend" id="pd2">2</div><div class="prog-line" id="pl2"></div>
-      <div class="prog-dot pend" id="pd3">3</div><div class="prog-line" id="pl3"></div>
-      <div class="prog-dot pend" id="pd4">4</div>
-    </div>
-    <!-- Step 1: Format -->
-    <div id="cs1">
-      <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px">Choose Format</div>
-      <div class="fmt-list">
-        <button class="fmt-item" onclick="selFmt('whatsapp',this)"><div class="fmt-ico">💬</div><div><div class="fmt-name">WhatsApp Flyer</div><div class="fmt-desc">Share on status or groups</div></div><div class="fmt-range">1–4 <span style="color:var(--brand);font-size:9px">POPULAR</span></div></button>
-        <button class="fmt-item" onclick="selFmt('catalog',this)"><div class="fmt-ico">🗂️</div><div><div class="fmt-name">Mini Catalog</div><div class="fmt-desc">Multi-product showcase</div></div><div class="fmt-range">4–8</div></button>
-        <button class="fmt-item" onclick="selFmt('instagram',this)"><div class="fmt-ico">📷</div><div><div class="fmt-name">Instagram Post</div><div class="fmt-desc">Square for your feed</div></div><div class="fmt-range">1–3</div></button>
-        <button class="fmt-item" onclick="selFmt('story',this)"><div class="fmt-ico">📱</div><div><div class="fmt-name">Instagram Story</div><div class="fmt-desc">Vertical for stories</div></div><div class="fmt-range">1–2</div></button>
-        <button class="fmt-item" onclick="selFmt('pdf',this)" id="pdfFmt"><div class="fmt-ico">🖨️</div><div><div class="fmt-name">Printable PDF / A4</div><div class="fmt-desc">Professional print catalog</div></div><div class="fmt-range">4–20 <span id="pdfLock" style="font-size:9px;color:var(--gold)"></span></div></button>
-      </div>
-    </div>
-    <!-- Step 2: Products -->
-    <div id="cs2" class="hide">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.9px">Select Products</div>
-        <span style="font-size:12.5px;color:var(--brand);font-weight:700" id="selCnt">0 selected</span>
-      </div>
-      <div class="prods-grid" id="cpGrid"></div>
-      <button class="btn green lg full" style="margin-top:13px" onclick="cStep(3)" id="toTmplBtn" disabled>Continue — Choose Template →</button>
-    </div>
-    <!-- Step 3: Template -->
-    <div id="cs3" class="hide">
-      <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px">Pick a Template</div>
-      <div style="display:flex;flex-direction:column;gap:8px" id="tmplList"></div>
-      <div id="tmplPreviewWrap" class="hide" style="margin-top:14px">
-        <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:9px">Preview</div>
-        <div id="tmplMiniPreview"></div>
-        <button class="btn green lg full" onclick="goUseTemplate()" style="margin-top:13px">Use This Template →</button>
-      </div>
-    </div>
-    <!-- Step 4: Preview & Share -->
-    <div id="cs4" class="hide">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.9px">Your Flyer ✨</div>
-        <button class="btn ghost sm" onclick="cStep(3)">← Change</button>
-      </div>
-      <div id="flyerWrap" style="padding-bottom:4px"></div>
-      <div style="margin-top:14px;background:var(--sur2);border:1.5px solid var(--b1);border-radius:var(--r);padding:15px">
-        <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:11px">Share your flyer</div>
-        <div class="share-row">
-          <button class="share-btn" id="sb-whatsapp" onclick="flyerAction('whatsapp')"><span class="share-btn-ico">💬</span>WhatsApp</button>
-          <button class="share-btn" id="sb-instagram" onclick="flyerAction('instagram')"><span class="share-btn-ico">📷</span>Instagram</button>
-          <button class="share-btn" id="sb-download" onclick="flyerAction('download')"><span class="share-btn-ico">⬇️</span>Download</button>
-        </div>
-        <div class="share-row" style="margin-top:8px">
-          <button class="share-btn" id="sb-pdf" onclick="flyerAction('pdf')"><span class="share-btn-ico">🖨️</span>PDF</button>
-          <button class="share-btn" id="sb-save" onclick="flyerAction('save')"><span class="share-btn-ico">💾</span>Save</button>
-          <button class="share-btn" onclick="flyerAction('link')"><span class="share-btn-ico">🔗</span>Copy Link</button>
-        </div>
-        <div id="flyerNotice" class="hide" style="margin-top:11px;padding:10px 13px;background:rgba(245,158,11,.08);border:1.5px solid rgba(245,158,11,.22);border-radius:11px;font-size:12px;color:var(--gold)"></div>
-      </div>
-      <button class="btn ghost md full" onclick="initCreate()" style="margin-top:9px">✨ Create Another Flyer</button>
-    </div>
-  </div>
-</div>
-
-<!-- ADD PRODUCT -->
-<div class="page app-shell" id="page-add-product">
-  <div class="add-prod-top">
-    <button class="back-btn" onclick="go('products')">← Products</button>
-    <h1 style="font-family:var(--fd);font-size:23px;font-weight:800;letter-spacing:-.5px;color:var(--t1)" id="apTitle">Add Product</h1>
-    <div style="font-size:12px;color:var(--t3);margin-top:2px;margin-bottom:18px" id="apSub">Fill in the details below</div>
-
-    <!-- Pro tip card -->
-    <div class="pro-tip" id="proTip">
-      <div class="pro-tip-ico">💡</div>
-      <div>
-        <div class="pro-tip-title">Pro Tip — Better Photos = More Sales</div>
-        <div class="pro-tip-text">Products photographed on a <strong>clean white or light background</strong> get significantly more clicks and trust. Use natural light, keep it simple. Your product should be the star. A clear, sharp photo can be the difference between a scroll and a sale.</div>
-      </div>
-      <button class="pro-tip-close" onclick="qs('proTip').style.display='none'">✕</button>
-    </div>
-
-    <label class="img-upload" id="imgLabel" for="imgFile">
-      <div class="img-ph" id="imgPh"><div class="img-ph-ico">📷</div><div class="img-ph-t">Tap to add product photo</div><div class="img-ph-h">Max 5MB · JPG PNG WEBP · White background recommended</div></div>
-      <input type="file" id="imgFile" accept="image/*" onchange="handleImg(event)"/>
-    </label>
-    <button class="btn red sm hide" id="rmImgBtn" onclick="rmImg()" style="margin-top:5px">✕ Remove photo</button>
-
-    <div style="height:13px"></div>
-    <div class="fg"><label class="fl">Product Name *</label><input class="fi" id="pName" placeholder="e.g. Classic Snapback Cap"/><div class="ferr hide" id="pNameErr">Name is required</div></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div class="fg"><label class="fl">Price (R) *</label><input class="fi" id="pPrice" type="number" min="0" placeholder="0.00"/><div class="ferr hide" id="pPriceErr">Enter valid price</div></div>
-      <div class="fg"><label class="fl">Original Price</label><input class="fi" id="pOrig" type="number" min="0" placeholder="Optional"/><div class="fhint">Shows strikethrough</div></div>
-    </div>
-    <div class="fg"><label class="fl">Description</label><textarea class="ta" id="pDesc" rows="2" placeholder="Short description..."></textarea></div>
-    <div class="fg"><label class="fl">Category *</label><div class="chips" id="pCatChips"></div></div>
-    <div class="fg" style="margin-top:5px"><label class="fl">Stock Status</label><div class="chips" id="pStatusChips"></div></div>
-    <div style="height:13px"></div>
-    <button class="btn green lg full" onclick="saveProd()" id="saveProdBtn">Add Product ✓</button>
-    <button class="btn red md full hide" id="delProdBtn" onclick="delProd()" style="margin-top:8px">Delete Product</button>
-  </div>
-</div>
-
-<!-- PRODUCTS -->
-<div class="page app-shell" id="page-products">
-  <div class="prods-top">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-      <div><h1 style="font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--t1)">My Products</h1><div style="font-size:11.5px;color:var(--t3);margin-top:1px" id="prodCountLbl">0 items</div></div>
-      <button class="btn green md" onclick="go('add-product')">+ Add</button>
-    </div>
-  </div>
-  <div class="chips-row" id="prodCatFilter"></div>
-  <div class="prods-grid" style="padding:0 var(--pad)" id="allProdsGrid"></div>
-</div>
-
-<!-- MY STORE -->
-<div class="page app-shell" id="page-store">
-  <div class="store-top">
-    <div class="store-row">
-      <div class="store-av" id="stAv">S</div>
-      <div style="flex:1">
-        <div class="store-title" id="stTitle">Your Store</div>
-        <div class="store-cat-lbl" id="stCat">Category</div>
-        <div style="margin-top:6px"><span id="stLiveBadge" style="font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(22,163,74,.12);color:var(--brand)">🟢 Live</span></div>
-      </div>
-      <button class="btn ghost sm" onclick="openEditStore()">✏️ Edit</button>
-    </div>
-    <div style="font-size:12.5px;color:var(--t2);margin-top:10px;line-height:1.55" id="stDesc"></div>
-    <div style="display:flex;flex-wrap:wrap;gap:11px;margin-top:10px;font-size:11.5px;color:var(--t3)" id="stContact"></div>
-    <!-- Social links -->
-    <div class="social-links-wrap" id="stSocial"></div>
-    <div class="live-row">
-      <div><div class="live-label">Store Visibility</div><div class="live-sub" id="liveSub">Your store is visible to everyone</div></div>
-      <label class="toggle"><input type="checkbox" id="liveToggle" checked onchange="toggleLive(this.checked)"/><div class="tslider"></div></label>
-    </div>
-    <div class="link-row">
-      <div class="link-display" id="stLink">localrack.app/store/your-store</div>
-      <button class="btn ghost sm" onclick="copyLink()">📋 Copy</button>
-    </div>
-  </div>
-  <div style="padding:13px var(--pad) 0">
-    <div class="sec-head" style="padding:0 0 9px"><span class="sec-head-t">Products</span><button class="sec-head-l" onclick="go('add-product')">+ Add</button></div>
-    <div class="prods-grid" id="stProdsGrid"></div>
-  </div>
-</div>
-
-<!-- ACCOUNT -->
-<div class="page app-shell" id="page-account">
-  <div class="acct-top">
-    <div style="display:flex;align-items:center;gap:13px;padding-bottom:18px">
-      <div style="width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,var(--brand-d),var(--brand));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:19px;color:#fff" id="acctAv">M</div>
-      <div><div style="font-family:var(--fd);font-size:16px;font-weight:800;color:var(--t1)" id="acctName">Mbuso Cele</div><div style="font-size:11.5px;color:var(--t3)" id="acctEmail">user@email.com</div></div>
-      <div id="acctAdminBadge" class="hide" style="margin-left:auto;background:var(--admin-glow);color:var(--admin-l);border:1.5px solid rgba(124,58,237,.28);font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px">⚡ ADMIN</div>
-    </div>
-  </div>
-  <div class="plan-card">
-    <div class="plan-top">
-      <div><div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:2px">Current Plan</div><div class="plan-name-t" id="aPlanName">Free</div></div>
-      <div class="plan-badge pb-free" id="aPlanBadge">Free</div>
-    </div>
-    <div class="usage-bar-row">
-      <div class="usage-bar-lbl"><span>Products</span><span id="aProdUsage">0 / 5</span></div>
-      <div class="usage-bar-track"><div class="usage-bar-fill" id="aProdBar" style="width:0%"></div></div>
-    </div>
-    <div class="usage-bar-row" style="margin-top:7px">
-      <div class="usage-bar-lbl"><span>Weekly Flyers</span><span id="aFlyerUsage">0 / 3</span></div>
-      <div class="usage-bar-track"><div class="usage-bar-fill" id="aFlyerBar" style="width:0%"></div></div>
-    </div>
-    <div style="font-size:10.5px;color:var(--t3);margin-top:5px" id="aResetDate">Resets in 7 days</div>
-    <button class="btn gold md full" style="margin-top:11px" onclick="go('plans')">⚡ Upgrade Plan</button>
-  </div>
-  <div class="menu-list">
-    <button class="menu-item" onclick="go('store')"><span class="mi-ico">🏪</span><span class="mi-txt">Manage Store</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" onclick="go('products')"><span class="mi-ico">📦</span><span class="mi-txt">My Products</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" onclick="showToast('Saved exports — connect Supabase','ok')"><span class="mi-ico">💾</span><span class="mi-txt">Saved Exports</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" onclick="showToast('Analytics — Creator plan & above','ok')"><span class="mi-ico">📊</span><span class="mi-txt">Analytics</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" onclick="showToast('Settings coming soon','ok')"><span class="mi-ico">⚙️</span><span class="mi-txt">App Settings</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" onclick="showToast('support@localrack.app','ok')"><span class="mi-ico">❓</span><span class="mi-txt">Help & Support</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" onclick="showAbout()"><span class="mi-ico">ℹ️</span><span class="mi-txt">About Local Rack</span><span class="mi-arr">→</span></button>
-    <button class="menu-item" style="color:var(--danger)" onclick="doLogout()"><span class="mi-ico">🚪</span><span class="mi-txt" style="color:var(--danger)">Sign Out</span></button>
-  </div>
-  <div class="footer-c" style="margin-top:18px">A product of InkAiron Studios · Mbuso Cele © 2026</div>
-</div>
-
-<!-- PLANS -->
-<div class="page app-shell" id="page-plans">
-  <div class="plans-top">
-    <button class="back-btn" onclick="go('account')">← Back</button>
-    <h1 style="font-family:var(--fd);font-size:25px;font-weight:800;letter-spacing:-.7px;color:var(--t1)">Choose Your Plan</h1>
-    <p style="font-size:12.5px;color:var(--t2);margin-top:4px">All prices in Rand. Cancel anytime.</p>
-    <div class="plans-stack" id="plansStack"></div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     JAVASCRIPT
-     ═══════════════════════════════════════════════════════ -->
-<script>
-// ── PLAN CONFIG ────────────────────────────────────────────────
-// Each plan defines exact limits. -1 = unlimited.
-const PLANS_CFG = {
-  free:     { name:'Free',       price:0,   lbl:'Free',    prodLim:5,   weeklyFlyers:3,  savedProjects:1,  pdf:false, scheduled:false, staffLogins:1, analytics:false,
-    feats:['5 product slots','3 flyers per week','1 saved project','Download with watermark','Share via link','Discovery listing'] },
-  hustler:  { name:'Hustler',    price:49,  lbl:'R49/mo',  prodLim:20,  weeklyFlyers:15, savedProjects:5,  pdf:false, scheduled:false, staffLogins:1, analytics:false,
-    feats:['20 product slots','15 flyers per week','5 saved projects','Download without watermark','All templates','WhatsApp, Instagram, Facebook, TikTok links','Discovery listing'] },
-  creator:  { name:'Creator',    price:129, lbl:'R129/mo', prodLim:50,  weeklyFlyers:40, savedProjects:15, pdf:true,  scheduled:false, staffLogins:1, analytics:true,
-    feats:['50 product slots','40 flyers per week','15 saved projects','PDF catalog export','No watermark','Analytics dashboard','Priority listing'] },
-  business: { name:'Business',   price:399, lbl:'R399/mo', prodLim:100, weeklyFlyers:100,savedProjects:30, pdf:true,  scheduled:true,  staffLogins:3, analytics:true,  popular:true,
-    feats:['100 product slots','100 flyers per week','30 saved projects','PDF export + scheduled releases','3 staff logins','Full analytics','Featured on discovery'] },
-  ent:      { name:'Enterprise', price:999, lbl:'R999/mo', prodLim:-1,  weeklyFlyers:-1, savedProjects:-1, pdf:true,  scheduled:true,  staffLogins:-1,analytics:true,
-    feats:['Unlimited products','Unlimited flyers','Unlimited saved projects','The Rack placement every month','Multiple branch management','Custom brand kit + white-label','Dedicated support line','Monthly #1 wins a free month'] },
-  // Admin pseudo-plan — full access
-  admin:    { name:'Admin',      price:0,   lbl:'Admin',   prodLim:-1,  weeklyFlyers:-1, savedProjects:-1, pdf:true,  scheduled:true,  staffLogins:-1,analytics:true, feats:[] },
-};
-
-// Admin credentials
-const ADMIN_CREDS = { email:'admin@localrack.app', password:'LR@Admin2026!' };
-
-// ── STATE ──────────────────────────────────────────────────────
-const S = {
-  user: null, store: null, products: [], plan: 'free',
-  isAdmin: false,
-  allStores: [], curPage: 'landing', selCat: 'All', prodCat: 'All',
-  // Weekly usage — rolling 7 days
-  weeklyUsage: { count: 0, resetAt: null },
-  create: { step:1, fmt:null, selProds:[], tmpl:null },
-  editProdId: null,
-  annualBilling: false,
-};
-
-const CATS = ['All','Clothing','Shoes','Hats','Accessories','Food & Drinks','Beauty & Hair','Groceries','Electronics','Furniture','Services','Other'];
-const STATUSES = ['In Stock','Limited','Sold Out','Sale'];
-const TMPLS = [
-  { id:'fresh', name:'Fresh Market',  desc:'Green promo, bold prices',       ac:'#22c55e', bg:'#14532d', tx:'#fff' },
-  { id:'burst', name:'Burst Promo',   desc:'Dark retail, strong energy',     ac:'#ef4444', bg:'#1a1a1a', tx:'#fff' },
-  { id:'blue',  name:'Fresh Catalog', desc:'Soft blue multi-product advert', ac:'#3b82f6', bg:'#eff6ff', tx:'#1e3a5f' },
-  { id:'gold',  name:'Budget Saver',  desc:'Yellow-green month-end specials',ac:'#eab308', bg:'#fefce8', tx:'#1a1a1a' },
-  { id:'mint',  name:'Shop Deals',    desc:'Clean everyday advert',          ac:'#059669', bg:'#f0fdf4', tx:'#1a1a1a' },
-  { id:'night', name:'Night Luxe',    desc:'Dark premium catalog',           ac:'#a78bfa', bg:'#0d0d1a', tx:'#fff' },
-];
-
-// ── UTILS ──────────────────────────────────────────────────────
-const gid = () => `${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
-const fmt = n => `R${Number(n).toLocaleString('en-ZA')}`;
-const lim = (c,l) => l !== -1 && c >= l;
-const b64 = f => new Promise((r,j)=>{ const rd=new FileReader(); rd.onload=()=>r(rd.result); rd.onerror=()=>j(); rd.readAsDataURL(f); });
-const qs = id => document.getElementById(id);
-const show = (...ids) => ids.forEach(id=>qs(id)?.classList.remove('hide'));
-const hide = (...ids) => ids.forEach(id=>qs(id)?.classList.add('hide'));
-
-// ── TOAST ──────────────────────────────────────────────────────
-let _tt;
-function showToast(msg, type='') {
-  const t=qs('toast'); t.textContent=msg; t.className=`toast show ${type}`;
-  clearTimeout(_tt); _tt=setTimeout(()=>t.className='toast',3200);
-}
-
-// ── THEME ──────────────────────────────────────────────────────
-function setTheme(t) {
-  document.documentElement.setAttribute('data-theme',t);
-  localStorage.setItem('lr-theme',t);
-  ['thL','thLU'].forEach(id=>{const e=qs(id);if(e)e.classList.toggle('act',t==='light')});
-  ['thD','thDU'].forEach(id=>{const e=qs(id);if(e)e.classList.toggle('act',t==='dark')});
-}
-function toggleTheme() { const cur=document.documentElement.getAttribute('data-theme')||'light'; setTheme(cur==='light'?'dark':'light'); closeBurger(); }
-(()=>{ const t=localStorage.getItem('lr-theme')||'light'; setTheme(t); })();
-
-// ── PASSWORD TOGGLE ────────────────────────────────────────────
-function togglePw(inputId, btnId) {
-  const i=qs(inputId), b=qs(btnId); if(!i) return;
-  i.type=i.type==='password'?'text':'password';
-  if(b) b.textContent=i.type==='password'?'👁':'🙈';
-}
-
-// ── WEEKLY USAGE (ROLLING 7 DAYS) ─────────────────────────────
-/**
- * Checks if the user can create a flyer based on rolling 7-day window.
- * resets automatically when resetAt is in the past.
- */
-function canCreateFlyer() {
-  if (S.isAdmin) return true;
-  const plan = PLANS_CFG[S.plan];
-  if (plan.weeklyFlyers === -1) return true;
-  checkResetUsage();
-  return S.weeklyUsage.count < plan.weeklyFlyers;
-}
-
-function checkResetUsage() {
-  if (!S.weeklyUsage.resetAt) return;
-  if (new Date() >= new Date(S.weeklyUsage.resetAt)) {
-    S.weeklyUsage.count = 0;
-    S.weeklyUsage.resetAt = null;
-  }
-}
-
-function consumeFlyer() {
-  if (S.isAdmin) return;
-  const plan = PLANS_CFG[S.plan];
-  if (plan.weeklyFlyers === -1) return;
-  S.weeklyUsage.count++;
-  if (!S.weeklyUsage.resetAt) {
-    // Set reset to 7 days from first use
-    const r = new Date(); r.setDate(r.getDate()+7);
-    S.weeklyUsage.resetAt = r.toISOString();
-  }
-}
-
-function resetWeekly() {
-  S.weeklyUsage = { count:0, resetAt:null };
-  closeBurger();
-  showToast('Weekly limit reset ✓','adm');
-}
-
-function daysUntilReset() {
-  if (!S.weeklyUsage.resetAt) return 7;
-  const diff = new Date(S.weeklyUsage.resetAt) - new Date();
-  return Math.max(0, Math.ceil(diff / (1000*60*60*24)));
-}
-
-function renderUsagePill(containerId) {
-  const w=qs(containerId); if(!w||!S.user) return;
-  if (S.isAdmin) { w.innerHTML=''; return; }
-  const plan=PLANS_CFG[S.plan];
-  if (plan.weeklyFlyers===-1) { w.innerHTML=''; return; }
-  checkResetUsage();
-  const used=S.weeklyUsage.count, total=plan.weeklyFlyers;
-  const pct=Math.min((used/total)*100,100);
-  const cls=pct>=100?'full':pct>=70?'warn':'ok';
-  const days=daysUntilReset();
-  w.innerHTML=`
-    <div class="usage-pill">
-      <div class="usage-pill-ico">✨</div>
-      <div class="usage-pill-info">
-        <div class="usage-pill-title">Weekly Flyers: ${used} / ${total}</div>
-        <div class="usage-pill-sub">${total-used} remaining${used>0?` · Resets in ${days} day${days!==1?'s':''}`:''}</div>
-        <div class="usage-track"><div class="usage-fill ${cls}" style="width:${pct}%"></div></div>
-      </div>
-      ${pct>=100?`<button class="btn gold sm" onclick="go('plans')" style="margin-left:4px;flex-shrink:0">Upgrade</button>`:''}
-    </div>`;
-}
-
-// ── BURGER MENU ────────────────────────────────────────────────
-function openBurger() { qs('burgerOv').classList.add('open'); qs('burgerDrawer').classList.add('open'); document.body.style.overflow='hidden'; }
-function closeBurger() { qs('burgerOv').classList.remove('open'); qs('burgerDrawer').classList.remove('open'); document.body.style.overflow=''; }
-
-function updateDrawer() {
-  if (S.user) {
-    hide('dGuest'); show('dUser');
-    const av=qs('dAv'); if(av){ av.textContent=S.user.name?.[0]?.toUpperCase()||'U'; if(S.isAdmin) av.classList.add('admin-av'); else av.classList.remove('admin-av'); }
-    if(qs('dName')) qs('dName').textContent=S.user.name||'';
-    if(qs('dEmail')) qs('dEmail').textContent=S.user.email||'';
-    S.isAdmin ? show('adminMenuItems') : hide('adminMenuItems');
-  } else { show('dGuest'); hide('dUser'); }
-}
-
-// ── NAVIGATION ─────────────────────────────────────────────────
-function go(page, data=null) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('act'));
-  const pg=qs(`page-${page}`); if(!pg){go('discover');return;}
-  const authPages=['home','add-product','products','store','create','account','plans'];
-  if (authPages.includes(page)&&!S.user){go('discover');showAuth('signup');return;}
-  pg.classList.add('act');
-  S.curPage=page;
-  window.scrollTo({top:0,behavior:'smooth'});
-  updateBnav(page);
-  const inits={landing:initLanding,discover:initDiscover,home:initHome,rack:initRack,create:initCreate,products:initProds,store:initStore,account:initAcct,plans:initPlans,'add-product':()=>initAddProd(data)};
-  inits[page]?.();
-}
-
-function updateBnav(page) {
-  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('act'));
-  const map={discover:'bn-discover',rack:'bn-rack',store:'bn-store',account:'bn-account',home:'bn-discover'};
-  qs(map[page])?.classList.add('act');
-}
 
-window.addEventListener('scroll',()=>qs('nav')?.classList.toggle('scrolled',window.scrollY>20));
-
-// ── AUTH ───────────────────────────────────────────────────────
-function showAuth(mode){qs('authModal').classList.remove('hide');swAuth(mode)}
-function closeAuth(){qs('authModal').classList.add('hide')}
-function swAuth(mode){mode==='login'?(show('loginF'),hide('signupF')):(hide('loginF'),show('signupF'))}
-
-function demoLogin() {
-  S.user={id:'demo',name:'Mbuso Cele',email:'mbusocele11@gmail.com'};
-  S.plan='free'; S.isAdmin=false;
-  if(!S.store) S.store={name:'Urban Threadz',category:'Clothing',description:'Fresh streetwear & sneakers for the culture.',location:'Durban, KZN',phone:'+27612345678',instagram:'@urbanthreadz_dbn',whatsapp:'+27612345678',facebook:'',tiktok:'@urbanthreadz',isLive:true};
-  if(!S.products.length) addDemoProducts();
-  closeAuth(); updateNavAuth(true); updateDrawer();
-  go('home'); showToast('Welcome back! 👋','ok');
-}
-
-function doLogin() {
-  const e=qs('liEmail').value.trim(), p=qs('liPass').value;
-  if(!e||!p){showToast('Please fill in all fields','err');return;}
-  // Check admin credentials
-  if(e===ADMIN_CREDS.email&&p===ADMIN_CREDS.password){
-    adminLogin(); return;
-  }
-  demoLogin();
-}
-
-function adminLogin() {
-  S.user={id:'admin_001',name:'Admin — Local Rack',email:ADMIN_CREDS.email};
-  S.plan='admin'; S.isAdmin=true;
-  if(!S.store) S.store={name:'LR Admin Store',category:'Services',description:'Admin testing store',location:'Johannesburg',phone:'+27000000000',instagram:'@localrack',whatsapp:'',facebook:'',tiktok:'',isLive:true};
-  if(!S.products.length) addDemoProducts();
-  closeAuth();
-  // Show admin UI
-  document.body.classList.add('admin-mode');
-  show('adminBanner');
-  updateNavAuth(true); updateDrawer();
-  go('home');
-  showToast('⚡ Admin Mode Active — Local Rack v5','adm');
-}
-
-function doSignup() {
-  const n=qs('suName').value.trim(),e=qs('suEmail').value.trim(),p=qs('suPass').value,p2=qs('suPass2').value;
-  if(!n||!e||!p){showToast('Please fill in all fields','err');return;}
-  if(p.length<8){showToast('Password must be 8+ characters','err');return;}
-  if(p!==p2){showToast('Passwords do not match','err');return;}
-  S.user={id:gid(),name:n,email:e}; S.isAdmin=false;
-  closeAuth(); updateNavAuth(true); updateDrawer();
-  startOnboard();
-}
-
-function doLogout() {
-  S.user=null;S.store=null;S.products=[];S.isAdmin=false;S.plan='free';
-  document.body.classList.remove('admin-mode');
-  hide('adminBanner');
-  updateNavAuth(false); updateDrawer(); closeBurger();
-  go('landing'); showToast('Signed out','ok');
-}
-
-function updateNavAuth(li) {
-  qs('navGuest')?.classList.toggle('hide',li);
-  qs('navUser')?.classList.toggle('hide',!li);
-  qs('bnav')?.classList.toggle('hide',!li);
-}
-
-function showAbout(){closeBurger();qs('aboutModal').classList.remove('hide')}
-
-function addDemoProducts() {
-  S.products=[
-    {id:gid(),name:'Graphic Tee – Limited',price:220,category:'Clothing',status:'Limited',description:'Exclusive drop, limited quantities',image:null},
-    {id:gid(),name:'Bucket Hat',price:120,category:'Hats',status:'In Stock',description:'Reversible design',image:null},
-    {id:gid(),name:'Track Pants',price:320,originalPrice:400,category:'Clothing',status:'Sale',description:'Slim fit stripe detail',image:null},
-    {id:gid(),name:'Classic Snapback',price:180,category:'Hats',status:'In Stock',description:'Premium adjustable fit',image:null},
-  ];
-  if(S.curPage==='products') initProds();
-  if(S.curPage==='home') initHome();
-  showToast('Demo products loaded','adm');
-}
-
-// ── ADMIN TOOLS ────────────────────────────────────────────────
-function switchPlan() {
-  closeBurger();
-  const modal=qs('adminPlanModal'); if(!modal) return;
-  const list=qs('adminPlanList'); if(!list) return;
-  list.innerHTML=Object.entries(PLANS_CFG).map(([k,p])=>`
-    <button class="btn ${k===S.plan?'green':'ghost'} md full" onclick="setAdminPlan('${k}')" style="justify-content:space-between">
-      <span>${p.name}</span>
-      <span style="font-size:11px;opacity:.7">${p.lbl} · ${p.weeklyFlyers===-1?'∞':p.weeklyFlyers} flyers/wk</span>
-    </button>`).join('');
-  modal.classList.remove('hide');
-}
-
-function setAdminPlan(k) {
-  S.plan=k;
-  qs('adminPlanModal').classList.add('hide');
-  showToast(`Plan switched to ${PLANS_CFG[k].name}`,'adm');
-  if(S.curPage==='account') initAcct();
-  if(S.curPage==='create') initCreate();
-}
-
-// ── ONBOARDING ─────────────────────────────────────────────────
-function startOnboard() {
-  show('onboard'); obGo(0);
-  buildChips('ob-cats',CATS.filter(c=>c!=='All'),'Clothing','_oc');
-}
-
-function obGo(n) {
-  document.querySelectorAll('.ob-step').forEach(s=>s.classList.remove('act'));
-  const s=qs(`ob${n}`); if(s){s.classList.add('act');s.style.animation='none';s.offsetHeight;s.style.animation='';}
-  if(n===2&&!S.store){
-    const nm=qs('ob-name')?.value.trim();
-    if(!nm){obGo(1);showToast('Please enter your store name','err');return;}
-    S.store={name:nm,category:qs('ob-cats')._oc||'Other',description:qs('ob-desc')?.value.trim()||'',location:qs('ob-loc')?.value.trim()||'',phone:qs('ob-phone')?.value.trim()||'',instagram:'',whatsapp:'',facebook:'',tiktok:'',isLive:true};
-  }
-}
-function finishOnboard(){hide('onboard');go('home')}
-
-// ── LIVE COUNTER ───────────────────────────────────────────────
-let _base=1247;
-setInterval(()=>{
-  _base=Math.max(1100,Math.min(1500,_base+Math.floor(Math.random()*7)-3));
-  const el=qs('liveCnt');if(el)el.textContent=_base.toLocaleString('en-ZA');
-},4000);
-
-// ── LANDING ────────────────────────────────────────────────────
-let _annual=false;
-function initLanding() {
-  const demos=[
-    {name:"Zara's Closet",cat:'Fashion',ico:'👗',v:'14.8K'},{name:'Siya Kicks',cat:'Shoes',ico:'👟',v:'9.2K'},
-    {name:"Mama's Kitchen",cat:'Food',ico:'🍲',v:'7.6K'},{name:'Glow Beauty',cat:'Beauty',ico:'💄',v:'11.1K'},
-    {name:'Tech Hub',cat:'Electronics',ico:'📱',v:'6.3K'},{name:'Fresh Threads',cat:'Clothing',ico:'👕',v:'8.9K'},
-    {name:'Sneaker Lab',cat:'Shoes',ico:'👟',v:'5.4K'},{name:'Spice Bistro',cat:'Food',ico:'🌶️',v:'4.7K'},
-  ];
-  const t=qs('scrollTrack');if(t){const all=[...demos,...demos];t.innerHTML=all.map(d=>`<div class="scroll-card"><div class="sm-img">${d.ico}</div><div class="sm-body"><div class="sm-name">${d.name}</div><div class="sm-cat">${d.cat}</div><div class="sm-stat">👁 ${d.v} views</div></div></div>`).join('');}
-  animCount('hs1',2847);animCount('hs2',18293);animCount('hs3',94721);
-  renderLandingPricing();
-}
-
-function toggleAnnual() {
-  _annual=qs('annualToggle')?.checked||false;
-  renderLandingPricing();
-}
-
-function renderLandingPricing() {
-  const g=qs('landingPriceGrid'); if(!g) return;
-  const tiers=['free','hustler','creator','business','ent'];
-  g.innerHTML=tiers.map(k=>{
-    const p=PLANS_CFG[k];
-    const monthlyP=p.price;
-    const annualP=_annual?Math.round(monthlyP*10/12):monthlyP;
-    const priceDisplay=monthlyP===0?'Free':`R${_annual?annualP:monthlyP}`;
-    return `<div class="price-card ${p.popular?'pop':''}">
-      ${p.popular?'<div class="pop-badge">Most Popular</div>':''}
-      <div class="price-name" style="${p.popular?'margin-top:12px':''}">${p.name}</div>
-      <div style="margin:6px 0 3px"><span class="price-amt">${priceDisplay}</span>${monthlyP>0?`<span class="price-per">/${_annual?'mo·annual':'mo'}</span>`:''}</div>
-      <div class="price-feats">${p.feats.map(f=>`<div class="price-feat"><span class="price-ck">✓</span>${f}</div>`).join('')}</div>
-      <button class="btn ${p.popular?'gold':'outline'} md full" onclick="showAuth('signup')">${monthlyP===0?'Get Started':'Upgrade'}</button>
-    </div>`;
-  }).join('');
-}
-
-function animCount(id,target){
-  const el=qs(id);if(!el)return;let c=0;const step=target/60;
-  const t=setInterval(()=>{c=Math.min(c+step,target);el.textContent=Math.floor(c).toLocaleString('en-ZA');if(c>=target)clearInterval(t);},16);
-}
-
-// ── DISCOVER ───────────────────────────────────────────────────
-function initDiscover() {
-  if(!S.allStores.length) S.allStores=[
-    {id:'s1',name:"Zara's Closet",cat:'Clothing',ico:'👗',views:14821,pLikes:340,isLive:true,boost:true,loc:'Johannesburg'},
-    {id:'s2',name:'Siya Kicks',cat:'Shoes',ico:'👟',views:9271,pLikes:189,isLive:true,boost:false,loc:'Cape Town'},
-    {id:'s3',name:"Mama's Kitchen",cat:'Food & Drinks',ico:'🍲',views:7634,pLikes:201,isLive:true,boost:false,loc:'Durban'},
-    {id:'s4',name:'Glow Beauty',cat:'Beauty & Hair',ico:'💄',views:11102,pLikes:312,isLive:true,boost:true,loc:'Pretoria'},
-    {id:'s5',name:'Tech Hub Mzansi',cat:'Electronics',ico:'📱',views:6312,pLikes:98,isLive:true,boost:false,loc:'Johannesburg'},
-    {id:'s6',name:'Fresh Threads',cat:'Clothing',ico:'👕',views:8901,pLikes:234,isLive:true,boost:false,loc:'Cape Town'},
-    {id:'s7',name:'Spice Bistro',cat:'Food & Drinks',ico:'🌶️',views:4721,pLikes:87,isLive:false,boost:false,loc:'Durban'},
-    {id:'s8',name:'Natural Roots',cat:'Beauty & Hair',ico:'💆',views:3892,pLikes:64,isLive:true,boost:false,loc:'Soweto'},
-    {id:'s9',name:'Urban Threadz',cat:'Clothing',ico:'🧢',views:5201,pLikes:145,isLive:true,boost:false,loc:'Durban'},
-  ];
-  buildScrollChips('catChips',filterStores);
-  renderStores(S.allStores);
-}
-
-function buildScrollChips(id,cb){
-  const w=qs(id);if(!w)return;w.innerHTML='';
-  CATS.forEach(c=>{const b=document.createElement('button');b.className=`chip-r ${c===S.selCat?'act':''}`;b.textContent=c;b.onclick=()=>{S.selCat=c;w.querySelectorAll('.chip-r').forEach(x=>x.classList.remove('act'));b.classList.add('act');cb();};w.appendChild(b);});
-}
-
-function renderStores(stores){
-  const g=qs('storesGrid');if(!g)return;
-  g.innerHTML=stores.map(s=>`<div class="card store-card ${!s.isLive?'offline':''}" onclick="viewStore('${s.id}')"><div class="sc-banner"><span style="font-size:40px">${s.ico}</span><div class="sc-badge ${s.boost?'sc-boost':s.isLive?'sc-live':'sc-off'}">${s.boost?'⚡ Boosted':s.isLive?'🟢 Live':'⭘ Offline'}</div></div><div class="sc-body"><div class="sc-name">${s.name}</div><div class="sc-cat">${s.cat} · ${s.loc}</div><div class="sc-stats"><span>👁 ${s.views.toLocaleString('en-ZA')}</span><span>❤️ ${s.pLikes}</span></div></div></div>`).join('');
-  const el=qs('storeCnt');if(el)el.textContent=`${stores.filter(x=>x.isLive).length} stores`;
-}
-
-function filterStores(){
-  const q=(qs('searchIn')?.value||'').toLowerCase();
-  renderStores(S.allStores.filter(s=>(S.selCat==='All'||s.cat===S.selCat)&&(s.name.toLowerCase().includes(q)||s.cat.toLowerCase().includes(q)||s.loc.toLowerCase().includes(q))));
-}
-
-function viewStore(id){const s=S.allStores.find(x=>x.id===id);if(s)showToast(`Opening ${s.name}...`,'ok')}
-
-// ── HOME ───────────────────────────────────────────────────────
-function initHome(){
-  if(!S.store)return;
-  if(qs('hName'))qs('hName').textContent=S.store.name;
-  if(qs('hProds'))qs('hProds').textContent=S.products.length;
-  if(qs('hViews'))qs('hViews').textContent='0';
-  if(qs('hLikes'))qs('hLikes').textContent='0';
-  renderUsagePill('weeklyUsageHome');
-  const g=qs('hProdsGrid');if(!g)return;
-  const r=[...S.products].reverse().slice(0,4);
-  g.innerHTML=r.length?r.map(p=>prodCard(p)).join(''):`<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--t3);font-size:12.5px">No products yet. <button onclick="go('add-product')" style="color:var(--brand);font-weight:700;background:none;border:none;cursor:pointer">Add your first →</button></div>`;
-}
-
-// ── THE RACK ───────────────────────────────────────────────────
-function initRack(){
-  const g=qs('rackGrid');if(!g)return;
-  const sorted=[...S.allStores].filter(s=>s.isLive).sort((a,b)=>b.views-a.views);
-  g.innerHTML=sorted.map((s,i)=>`<div class="rack-item" onclick="viewStore('${s.id}')"><div class="rack-rank">#${i+2}</div><div class="rack-img">${s.ico}</div><div class="rack-body"><div class="rack-name">${s.name}</div><div class="rack-stat">👁 ${s.views.toLocaleString('en-ZA')}</div></div></div>`).join('');
-}
-function rackTab(tab,el){document.querySelectorAll('.rack-tab').forEach(t=>t.classList.remove('act'));el.classList.add('act');showToast(`Filtered: ${tab}`,'ok')}
-
-// ── CREATE WIZARD ──────────────────────────────────────────────
-function initCreate(){
-  S.create={step:1,fmt:null,selProds:[],tmpl:null};
-  hide('tmplPreviewWrap');
-  renderUsagePill('createUsagePill');
-  // Lock PDF format based on plan
-  const plan=PLANS_CFG[S.plan];
-  const pdfLock=qs('pdfLock');if(pdfLock)pdfLock.textContent=plan.pdf?'':'🔒 Creator+';
-  cStep(1); buildCProdsGrid(); buildTmplList();
-}
-
-function selFmt(fmt,el){
-  // Check weekly limit before allowing
-  if(!canCreateFlyer()){showToast(`Weekly limit reached (${PLANS_CFG[S.plan].weeklyFlyers}/wk). Upgrade to continue.`,'err');go('plans');return;}
-  if(fmt==='pdf'&&!PLANS_CFG[S.plan].pdf&&!S.isAdmin){showToast('PDF export — Creator plan from R129/mo','err');go('plans');return;}
-  S.create.fmt=fmt;
-  document.querySelectorAll('.fmt-item').forEach(f=>f.classList.remove('sel'));
-  el.classList.add('sel');
-  setTimeout(()=>cStep(2),260);
-}
-
-function cStep(n){
-  S.create.step=n;
-  [1,2,3,4].forEach(s=>{const el=qs(`cs${s}`);if(el)el.classList.toggle('hide',s!==n);});
-  [1,2,3,4].forEach(s=>{
-    const d=qs(`pd${s}`);if(d){d.className=`prog-dot ${s<n?'done':s===n?'cur':'pend'}`;d.textContent=s<n?'✓':s;}
-    const l=qs(`pl${s}`);if(l)l.classList.toggle('done',s<n);
-  });
-}
-
-function buildCProdsGrid(){
-  const g=qs('cpGrid');if(!g)return;
-  if(!S.products.length){g.innerHTML=`<div style="grid-column:1/-1;padding:28px;text-align:center;color:var(--t3);font-size:12.5px">No products yet. <button onclick="go('add-product')" style="color:var(--brand);font-weight:700;background:none;border:none;cursor:pointer">Add products first →</button></div>`;return;}
-  g.innerHTML=S.products.map(p=>prodCard(p,true)).join('');
-  g.querySelectorAll('.prod-card').forEach(c=>c.onclick=()=>toggleProdSel(c.dataset.id));
-}
-
-function toggleProdSel(id){
-  const idx=S.create.selProds.indexOf(id);
-  idx===-1?S.create.selProds.push(id):S.create.selProds.splice(idx,1);
-  document.querySelectorAll('#cpGrid .prod-card').forEach(c=>c.classList.toggle('sel',S.create.selProds.includes(c.dataset.id)));
-  const n=S.create.selProds.length;
-  if(qs('selCnt'))qs('selCnt').textContent=`${n} selected`;
-  const btn=qs('toTmplBtn');if(btn)btn.disabled=n===0;
-}
-
-function buildTmplList(){
-  const l=qs('tmplList');if(!l)return;
-  l.innerHTML=TMPLS.map(t=>`
-    <button class="tmpl-item" onclick="selTmpl('${t.id}',this)">
-      <div class="tmpl-swatch" style="background:${t.ac};box-shadow:0 2px 8px ${t.ac}55"></div>
-      <div style="flex:1"><div class="tmpl-name">${t.name}</div><div class="tmpl-desc">${t.desc}</div></div>
-      <div style="font-size:16px;opacity:.25;flex-shrink:0">→</div>
-    </button>`).join('');
-}
-
-function selTmpl(id,el){
-  S.create.tmpl=TMPLS.find(t=>t.id===id);
-  document.querySelectorAll('.tmpl-item').forEach(t=>t.classList.remove('sel'));
-  el.classList.add('sel');
-  buildMiniPreview();
-  show('tmplPreviewWrap');
-  setTimeout(()=>qs('tmplPreviewWrap')?.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
-}
-
-function buildMiniPreview(){
-  const w=qs('tmplMiniPreview');if(!w)return;
-  const t=S.create.tmpl||TMPLS[0];
-  const prods=S.products.filter(p=>S.create.selProds.includes(p.id));
-  const st=S.store||{name:'My Store',description:'',phone:'',location:''};
-  w.innerHTML=`<div style="border-radius:13px;overflow:hidden;box-shadow:var(--sh-xl);background:${t.bg}">
-    <div style="padding:14px 16px;background:${t.ac}">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.65;color:${t.bg}">${t.name}</div><div style="font-family:var(--fd);font-size:17px;font-weight:800;color:${t.bg};line-height:1.1">${st.name}</div>${st.description?`<div style="font-size:10px;opacity:.65;color:${t.bg};margin-top:1px">${st.description.slice(0,38)}...</div>`:''}</div>
-        <div style="background:${t.bg};color:${t.ac};font-size:10px;font-weight:800;padding:4px 10px;border-radius:20px">${prods.length} ITEMS</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:7px;padding:10px">
-      ${prods.slice(0,4).map(p=>`<div style="border-radius:9px;overflow:hidden;background:rgba(0,0,0,0.1)"><div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.08);position:relative;overflow:hidden">${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover"/>`:`<span style="font-size:26px;opacity:.25">📦</span>`}<div style="position:absolute;bottom:4px;right:4px;background:${t.ac};color:${t.bg};font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px">${fmt(p.price)}</div></div><div style="padding:5px 8px"><div style="font-size:9.5px;font-weight:700;color:${t.tx};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div></div></div>`).join('')}
-      ${prods.length===0?`<div style="grid-column:1/-1;padding:18px;text-align:center;opacity:.25;color:${t.tx};font-size:11.5px">Your products will appear here</div>`:''}
-    </div>
-    ${(st.phone||st.location)?`<div style="padding:9px 13px;display:flex;align-items:center;justify-content:space-between;background:${t.ac}20;border-top:1px solid ${t.ac}28"><div><div style="font-size:10.5px;font-weight:800;color:${t.tx}">${st.name}</div><div style="font-size:9px;opacity:.5;color:${t.tx}">${[st.location,st.phone].filter(Boolean).join(' · ')}</div></div>${st.phone?`<div style="background:${t.ac};color:${t.bg};font-size:9px;font-weight:800;padding:4px 9px;border-radius:6px">ORDER NOW</div>`:''}</div>`:''}
-    <div style="text-align:center;font-size:8px;padding:5px;opacity:.18;color:${t.tx}">MADE WITH LOCAL RACK</div>
-  </div>`;
-}
-
-function goUseTemplate(){buildFlyer();cStep(4)}
-
-function buildFlyer(){
-  const w=qs('flyerWrap');if(!w)return;
-  const t=S.create.tmpl||TMPLS[0];
-  const prods=S.products.filter(p=>S.create.selProds.includes(p.id));
-  const st=S.store||{name:'My Store',description:'',phone:'',location:''};
-  const plan=PLANS_CFG[S.plan];
-
-  // Update share button lock states
-  const lockMap={
-    'sb-whatsapp': plan.weeklyFlyers>3||S.isAdmin,
-    'sb-instagram': plan.weeklyFlyers>3||S.isAdmin,
-    'sb-download': S.plan!=='free'||S.isAdmin,
-    'sb-pdf': plan.pdf||S.isAdmin,
-    'sb-save': plan.savedProjects>1||S.isAdmin,
-  };
-  Object.entries(lockMap).forEach(([id,unlocked])=>{
-    const btn=qs(id);if(btn)btn.classList.toggle('locked',!unlocked);
-  });
-
-  // Show notice for free users
-  const notice=qs('flyerNotice');
-  if(notice){
-    if(S.plan==='free'&&!S.isAdmin){
-      notice.classList.remove('hide');
-      notice.innerHTML=`<strong>Free plan:</strong> Copy the link to share your flyer. Upgrade from <button onclick="go('plans')" style="color:var(--gold);font-weight:800;background:none;border:none;cursor:pointer;text-decoration:underline">R49/mo</button> to download, save, and remove the watermark.`;
-    } else notice.classList.add('hide');
-  }
-
-  w.innerHTML=`<div style="border-radius:17px;overflow:hidden;box-shadow:0 12px 44px rgba(0,0,0,.2);background:${t.bg}">
-    <div style="padding:17px 19px;background:${t.ac}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:11px">
-        <div style="flex:1;min-width:0">
-          <div style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;opacity:.65;color:${t.bg};margin-bottom:2px">${t.name}</div>
-          <div style="font-family:'Syne',sans-serif;font-size:21px;font-weight:800;color:${t.bg};line-height:1.1;letter-spacing:-.5px">${st.name}</div>
-          ${st.description?`<div style="font-size:10.5px;opacity:.7;color:${t.bg};margin-top:2px;line-height:1.4">${st.description}</div>`:''}
-        </div>
-        <div style="background:${t.bg};color:${t.ac};font-size:10.5px;font-weight:800;padding:5px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0">${prods.length} ITEM${prods.length!==1?'S':''}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:13px">
-      ${prods.length?prods.map(p=>`<div style="border-radius:11px;overflow:hidden;background:rgba(0,0,0,0.1)"><div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.08);position:relative;overflow:hidden">${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;display:block"/>`:''}<span style="font-size:34px;opacity:.22;position:absolute">${p.image?'':'📦'}</span><div style="position:absolute;bottom:5px;right:5px;background:${t.ac};color:${t.bg};font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:7px;box-shadow:0 2px 7px rgba(0,0,0,.18)">${fmt(p.price)}</div>${p.originalPrice?`<div style="position:absolute;top:5px;right:5px;background:rgba(239,68,68,.9);color:#fff;font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:5px">SALE</div>`:''}</div><div style="padding:7px 10px"><div style="font-size:10.5px;font-weight:700;color:${t.tx};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>${p.description?`<div style="font-size:8.5px;opacity:.5;color:${t.tx};margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.description}</div>`:''}</div></div>`).join(''):`<div style="grid-column:1/-1;padding:30px;text-align:center;opacity:.28"><div style="font-size:30px;margin-bottom:7px">📦</div><div style="font-size:11.5px;color:${t.tx}">No products selected</div></div>`}
-    </div>
-    ${(st.phone||st.location)?`<div style="margin:0 13px 13px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:9px;background:${t.ac}18;border:1px solid ${t.ac}26;border-radius:11px"><div style="min-width:0"><div style="font-size:11.5px;font-weight:800;color:${t.tx};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${st.name}</div><div style="font-size:9.5px;opacity:.55;color:${t.tx};margin-top:1px">${[st.location,st.phone].filter(Boolean).join(' · ')}</div></div>${st.phone?`<div style="background:${t.ac};color:${t.bg};font-size:9.5px;font-weight:800;padding:6px 13px;border-radius:8px;flex-shrink:0;white-space:nowrap">ORDER NOW</div>`:''}</div>`:''}
-    ${plan.watermark||S.plan==='free'?`<div style="text-align:center;font-size:8px;padding:7px;opacity:.2;color:${t.tx};letter-spacing:.5px">MADE WITH LOCAL RACK</div>`:''}
-  </div>`;
-}
-
-// ── FLYER ACTIONS ──────────────────────────────────────────────
-function flyerAction(type) {
-  const plan=PLANS_CFG[S.plan]; const isPaid=S.plan!=='free'||S.isAdmin;
-  const st=S.store||{name:'localrack'};
-  const slug=st.name.toLowerCase().replace(/\s+/g,'-');
-  const fakeLink=`https://localrack.app/flyer/${slug}-${Date.now().toString(36)}`;
-  switch(type){
-    case 'whatsapp':
-      if(!isPaid){showToast('Copy your flyer link to share on WhatsApp 🔗','ok');return;}
-      showToast('Opening WhatsApp share...','ok'); break;
-    case 'instagram':
-      if(!isPaid){showToast('Upgrade to share directly to Instagram','ok');return;}
-      showToast('Opening Instagram share...','ok'); break;
-    case 'download':
-      if(!isPaid){showToast('Upgrade to R49/mo to download without watermark','ok');return;}
-      showToast('Downloading image...','ok'); break;
-    case 'pdf':
-      if(!plan.pdf&&!S.isAdmin){showToast('PDF export — Creator plan from R129/mo','ok');return;}
-      showToast('Generating PDF...','ok'); break;
-    case 'save':
-      if(plan.savedProjects<=1&&!S.isAdmin){showToast('More saved projects — Hustler from R49/mo','ok');return;}
-      showToast('Flyer saved to projects ✓','ok'); break;
-    case 'link':
-      navigator.clipboard?.writeText(fakeLink).catch(()=>{});
-      // Also try fallback for mobile
-      const ta=document.createElement('textarea'); ta.value=fakeLink;
-      ta.style.cssText='position:fixed;opacity:0;top:0;left:0';
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      try{document.execCommand('copy')}catch(e){}
-      document.body.removeChild(ta);
-      showToast('Flyer link copied! 🔗 Share anywhere','ok');
-      break;
-  }
-  // Consume weekly usage on first successful generate
-  if(type==='link') consumeFlyer();
-}
-
-// ── PRODUCTS ───────────────────────────────────────────────────
-function prodCard(p,selectable=false){
-  const sc={'In Stock':'s-in','Limited':'s-lim','Sold Out':'s-out','Sale':'s-sale'}[p.status]||'s-in';
-  const sel=selectable&&S.create.selProds.includes(p.id);
-  return `<div class="card prod-card ${sel?'sel':''}" data-id="${p.id}"><div class="prod-img">${p.image?`<img src="${p.image}" alt="${p.name}"/>`:'<span style="opacity:.2;font-size:38px">📦</span>'}<div class="prod-status ${sc}">${p.status}</div><div class="prod-check">✓</div></div><div class="prod-info"><div class="prod-name">${p.name}</div><div class="prod-cat">${p.category}</div><div class="prod-price">${fmt(p.price)}${p.originalPrice?`<span class="prod-orig">${fmt(p.originalPrice)}</span>`:''}</div></div></div>`;
+.bg{
+position:absolute;
+inset:0;
+overflow:hidden;
+pointer-events:none;
 }
-
-function initProds(){
-  if(qs('prodCountLbl'))qs('prodCountLbl').textContent=`${S.products.length} items`;
-  buildProdCatFilter(); renderAllProds();
+
+.bg span{
+position:absolute;
+font-size:25vw;
+font-weight:900;
+opacity:.03;
+animation:drift linear infinite;
 }
-
-function buildProdCatFilter(){
-  const w=qs('prodCatFilter');if(!w)return;w.innerHTML='';
-  CATS.forEach(c=>{const b=document.createElement('button');b.className=`chip-r ${c===S.prodCat?'act':''}`;b.textContent=c;b.onclick=()=>{S.prodCat=c;w.querySelectorAll('.chip-r').forEach(x=>x.classList.remove('act'));b.classList.add('act');renderAllProds();};w.appendChild(b);});
+
+.bg span:nth-child(1){
+top:5%;
+left:-20%;
+animation-duration:40s;
 }
 
-function renderAllProds(){
-  const g=qs('allProdsGrid');if(!g)return;
-  const f=S.products.filter(p=>S.prodCat==='All'||p.category===S.prodCat);
-  if(!f.length){g.innerHTML=`<div class="empty"><div class="empty-ico">📦</div><div class="empty-t">No products</div><div class="empty-s">Try a different filter or add a product</div></div>`;return;}
-  g.innerHTML=f.map(p=>prodCard(p)).join('');
-  g.querySelectorAll('.prod-card').forEach(c=>c.onclick=()=>go('add-product',S.products.find(p=>p.id===c.dataset.id)));
+.bg span:nth-child(2){
+top:40%;
+right:-20%;
+animation-duration:55s;
 }
 
-// ── ADD PRODUCT ────────────────────────────────────────────────
-function initAddProd(edit=null){
-  S.editProdId=edit?.id||null; const isE=!!edit;
-  if(qs('apTitle'))qs('apTitle').textContent=isE?'Edit Product':'Add Product';
-  if(qs('apSub'))qs('apSub').textContent=isE?'Update product details':`${S.products.length}/${PLANS_CFG[S.plan].prodLim===-1?'∞':PLANS_CFG[S.plan].prodLim} products used`;
-  if(qs('saveProdBtn'))qs('saveProdBtn').textContent=isE?'Update Product ✓':'Add Product ✓';
-  isE?show('delProdBtn'):hide('delProdBtn');
-  if(qs('pName'))qs('pName').value=edit?.name||'';
-  if(qs('pPrice'))qs('pPrice').value=edit?.price||'';
-  if(qs('pOrig'))qs('pOrig').value=edit?.originalPrice||'';
-  if(qs('pDesc'))qs('pDesc').value=edit?.description||'';
-  // Reset image
-  const lbl=qs('imgLabel'),ph=qs('imgPh');
-  lbl.querySelector('img')?.remove();lbl._imgData=null;
-  if(ph)ph.style.display='';hide('rmImgBtn');
-  if(edit?.image){ph.style.display='none';const img=document.createElement('img');img.src=edit.image;img.style.cssText='width:100%;height:185px;object-fit:cover';lbl.insertBefore(img,lbl.querySelector('input'));lbl._imgData=edit.image;show('rmImgBtn');}
-  buildChips('pCatChips',CATS.filter(c=>c!=='All'),edit?.category||'Clothing','_pc');
-  buildChips('pStatusChips',STATUSES,edit?.status||'In Stock','_ps');
-  // Check plan product limit
-  const p=PLANS_CFG[S.plan];
-  if(!isE&&lim(S.products.length,p.prodLim)&&!S.isAdmin){
-    if(qs('saveProdBtn')){qs('saveProdBtn').textContent='🔒 Limit Reached — Upgrade';qs('saveProdBtn').onclick=()=>go('plans');}
-  } else {
-    if(qs('saveProdBtn'))qs('saveProdBtn').onclick=saveProd;
-  }
+.bg span:nth-child(3){
+bottom:5%;
+left:-15%;
+animation-duration:65s;
 }
 
-function buildChips(id,opts,def,key){
-  const w=qs(id);if(!w)return;w.innerHTML='';w[key]=def;
-  opts.forEach(o=>{const b=document.createElement('button');b.type='button';b.className=`chip-btn ${o===def?'act':''}`;b.textContent=o;b.onclick=()=>{w[key]=o;w.querySelectorAll('.chip-btn').forEach(x=>x.classList.remove('act'));b.classList.add('act');};w.appendChild(b);});
+@keyframes drift{
+0%{transform:translateX(0);}
+50%{transform:translateX(120px);}
+100%{transform:translateX(0);}
 }
-
-async function handleImg(e){
-  const f=e.target.files?.[0];if(!f)return;
-  if(!f.type.startsWith('image/')){showToast('Select an image file','err');return;}
-  if(f.size>5*1024*1024){showToast('Image must be under 5MB','err');return;}
-  try{
-    const d=await b64(f);
-    const lbl=qs('imgLabel'),ph=qs('imgPh');
-    lbl.querySelector('img')?.remove();if(ph)ph.style.display='none';
-    const img=document.createElement('img');img.src=d;img.style.cssText='width:100%;height:185px;object-fit:cover;';
-    lbl.insertBefore(img,lbl.querySelector('input'));lbl._imgData=d;show('rmImgBtn');
-  }catch{showToast('Failed to load image','err');}
+
+.orbit-wrapper{
+position:relative;
+width:320px;
+height:320px;
+margin-bottom:40px;
 }
-
-function rmImg(){const lbl=qs('imgLabel'),ph=qs('imgPh');lbl.querySelector('img')?.remove();lbl._imgData=null;if(ph)ph.style.display='';hide('rmImgBtn');}
 
-function saveProd(){
-  const name=qs('pName')?.value.trim(),price=qs('pPrice')?.value;
-  let ok=true;
-  if(!name){show('pNameErr');ok=false;}else hide('pNameErr');
-  if(!price||isNaN(price)||Number(price)<=0){show('pPriceErr');ok=false;}else hide('pPriceErr');
-  if(!ok)return;
-  const cw=qs('pCatChips'),sw=qs('pStatusChips');
-  const prod={id:S.editProdId||gid(),name,price:Number(price),originalPrice:qs('pOrig')?.value?Number(qs('pOrig').value):null,description:qs('pDesc')?.value.trim()||'',category:cw._pc||'Other',status:sw._ps||'In Stock',image:qs('imgLabel')?._imgData||null,createdAt:new Date().toISOString()};
-  if(S.editProdId){S.products=S.products.map(p=>p.id===S.editProdId?prod:p);showToast('Product updated ✓','ok');}
-  else{S.products.push(prod);showToast('Product added ✓','ok');}
-  go('products');
+.logo{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:120px;
+height:120px;
+border-radius:30px;
+background:linear-gradient(135deg,#7ed957,#239a44);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:#06240f;
+font-weight:900;
+box-shadow:0 0 40px rgba(126,217,87,.5);
+z-index:10;
 }
 
-function delProd(){if(!S.editProdId)return;S.products=S.products.filter(p=>p.id!==S.editProdId);showToast('Product deleted','ok');go('products');}
-
-// ── STORE ──────────────────────────────────────────────────────
-function initStore(){
-  if(!S.store)return;const s=S.store;
-  if(qs('stTitle'))qs('stTitle').textContent=s.name;
-  if(qs('stCat'))qs('stCat').textContent=s.category;
-  if(qs('stDesc'))qs('stDesc').textContent=s.description||'';
-  if(qs('stAv'))qs('stAv').textContent=s.name[0]?.toUpperCase()||'S';
-  if(qs('liveToggle'))qs('liveToggle').checked=s.isLive!==false;
-  updateLiveBadge(s.isLive!==false);
-  const con=qs('stContact');if(con)con.innerHTML=[s.location&&`<span>📍 ${s.location}</span>`,s.phone&&`<span>📞 ${s.phone}</span>`].filter(Boolean).join('');
-  // Social links
-  renderSocialLinks();
-  const sl=s.name.toLowerCase().replace(/\s+/g,'-');
-  if(qs('stLink'))qs('stLink').textContent=`localrack.app/store/${sl}`;
-  const g=qs('stProdsGrid');if(!g)return;
-  g.innerHTML=S.products.length?S.products.map(p=>prodCard(p)).join(''):`<div class="empty"><div class="empty-ico">📦</div><div class="empty-t">No products yet</div><div class="empty-s">Add products to your catalog</div></div>`;
+.logo h1{
+font-size:42px;
 }
 
-function renderSocialLinks(){
-  const w=qs('stSocial');if(!w||!S.store)return;
-  const s=S.store;
-  const links=[
-    {key:'instagram',ico:'📸',label:'Instagram',val:s.instagram},
-    {key:'whatsapp',ico:'💬',label:'WhatsApp',val:s.whatsapp},
-    {key:'facebook',ico:'👥',label:'Facebook',val:s.facebook},
-    {key:'tiktok',ico:'🎵',label:'TikTok',val:s.tiktok},
-  ];
-  const hasAny=links.some(l=>l.val);
-  w.innerHTML=`<div class="social-links-title">Connect Your Socials</div><div class="social-links-row">${links.map(l=>`<button class="social-link-btn ${l.val?'has-link':''}" onclick="openEditStore()">${l.ico} ${l.val||l.label}</button>`).join('')}</div>${!hasAny?'<div style="font-size:11px;color:var(--t3);margin-top:6px">Tap any icon to add your social links — customers can follow you directly.</div>':''}`;
+.logo small{
+font-size:12px;
 }
 
-function toggleLive(v){if(S.store)S.store.isLive=v;updateLiveBadge(v);showToast(v?'🟢 Store is now Live':'⭘ Store is Offline','ok');}
-
-function updateLiveBadge(v){
-  const b=qs('stLiveBadge'),sub=qs('liveSub');
-  if(b){b.textContent=v?'🟢 Live':'⭘ Offline';b.style.background=v?'rgba(22,163,74,.12)':'var(--sur2)';b.style.color=v?'var(--brand)':'var(--t3)';}
-  if(sub)sub.textContent=v?'Your store is visible to everyone':'Store hidden from discovery';
+.ring{
+position:absolute;
+inset:0;
+animation:spin 24s linear infinite;
 }
 
-function copyLink(){
-  const t=qs('stLink')?.textContent;
-  if(t){
-    const ta=document.createElement('textarea');ta.value=`https://${t}`;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';document.body.appendChild(ta);ta.focus();ta.select();
-    try{document.execCommand('copy')}catch(e){}
-    document.body.removeChild(ta);
-    navigator.clipboard?.writeText(`https://${t}`).catch(()=>{});
-    showToast('Store link copied! 📋','ok');
-  }
+.ring2{
+animation-direction:reverse;
+animation-duration:36s;
 }
 
-function openEditStore(){
-  if(!S.store)return;const s=S.store;
-  if(qs('es-name'))qs('es-name').value=s.name||'';
-  if(qs('es-desc'))qs('es-desc').value=s.description||'';
-  if(qs('es-loc'))qs('es-loc').value=s.location||'';
-  if(qs('es-phone'))qs('es-phone').value=s.phone||'';
-  if(qs('es-ig'))qs('es-ig').value=s.instagram||'';
-  if(qs('es-wa'))qs('es-wa').value=s.whatsapp||'';
-  if(qs('es-fb'))qs('es-fb').value=s.facebook||'';
-  if(qs('es-tt'))qs('es-tt').value=s.tiktok||'';
-  buildChips('es-cats',CATS.filter(c=>c!=='All'),s.category||'Clothing','_ec');
-  qs('editStoreModal').classList.remove('hide');
+.item{
+position:absolute;
+width:60px;
+height:60px;
+border-radius:50%;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
-function saveStore(){
-  const n=qs('es-name')?.value.trim();if(!n){showToast('Store name required','err');return;}
-  const cw=qs('es-cats');
-  S.store={...S.store,name:n,category:cw._ec||S.store.category,description:qs('es-desc')?.value.trim()||'',location:qs('es-loc')?.value.trim()||'',phone:qs('es-phone')?.value.trim()||'',instagram:qs('es-ig')?.value.trim()||'',whatsapp:qs('es-wa')?.value.trim()||'',facebook:qs('es-fb')?.value.trim()||'',tiktok:qs('es-tt')?.value.trim()||''};
-  qs('editStoreModal').classList.add('hide');
-  initStore();showToast('Store updated ✓','ok');
-}
+.item:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
+.item:nth-child(2){top:20%;right:0;}
+.item:nth-child(3){bottom:20%;right:0;}
+.item:nth-child(4){bottom:0;left:50%;transform:translateX(-50%);}
+.item:nth-child(5){bottom:20%;left:0;}
+.item:nth-child(6){top:20%;left:0;}
 
-// ── ACCOUNT ────────────────────────────────────────────────────
-function initAcct(){
-  if(!S.user)return;
-  const p=PLANS_CFG[S.plan];
-  if(qs('acctName'))qs('acctName').textContent=S.user.name;
-  if(qs('acctEmail'))qs('acctEmail').textContent=S.user.email;
-  if(qs('acctAv'))qs('acctAv').textContent=S.user.name?.[0]?.toUpperCase()||'U';
-  if(qs('aPlanName'))qs('aPlanName').textContent=p.name;
-  const badge=qs('aPlanBadge');
-  if(badge){badge.textContent=p.lbl;badge.className=`plan-badge ${S.isAdmin?'pb-admin':S.plan==='free'?'pb-free':'pb-paid'}`;}
-  // Admin badge
-  S.isAdmin?show('acctAdminBadge'):hide('acctAdminBadge');
-  // Products usage
-  const prodPct=p.prodLim===-1?0:Math.min((S.products.length/p.prodLim)*100,100);
-  if(qs('aProdUsage'))qs('aProdUsage').textContent=`${S.products.length} / ${p.prodLim===-1?'∞':p.prodLim}`;
-  const pb=qs('aProdBar');if(pb){pb.style.width=`${prodPct}%`;pb.style.background=prodPct>=90?'var(--danger)':'var(--brand)';}
-  // Weekly flyers usage
-  checkResetUsage();
-  const used=S.weeklyUsage.count,total=p.weeklyFlyers;
-  const flyerPct=total===-1?0:Math.min((used/total)*100,100);
-  if(qs('aFlyerUsage'))qs('aFlyerUsage').textContent=total===-1?`${used} / ∞`:`${used} / ${total}`;
-  const fb=qs('aFlyerBar');if(fb){fb.style.width=`${flyerPct}%`;fb.style.background=flyerPct>=90?'var(--danger)':flyerPct>=70?'var(--gold)':'var(--brand)';}
-  if(qs('aResetDate')){
-    if(S.isAdmin)qs('aResetDate').textContent='Admin — no limits';
-    else if(!S.weeklyUsage.resetAt)qs('aResetDate').textContent='No flyers created this week yet';
-    else qs('aResetDate').textContent=`Rolling 7-day window · Resets in ${daysUntilReset()} day${daysUntilReset()!==1?'s':''}`;
-  }
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
 }
 
-// ── PLANS ──────────────────────────────────────────────────────
-function initPlans(){
-  const g=qs('plansStack');if(!g)return;
-  g.innerHTML=Object.entries(PLANS_CFG).filter(([k])=>k!=='admin').map(([k,p])=>`
-    <div class="plan-tier ${p.popular?'pop':''} ${k===S.plan?'cur':''}">
-      ${p.popular?'<div class="plan-pop-tag">Most Popular</div>':''}
-      <div class="plan-row" style="${p.popular?'margin-top:13px':''}">
-        <div class="plan-tier-name">${p.name}</div>
-        <div class="plan-price"><div class="plan-amt">${p.price===0?'Free':'R'+p.price}</div>${p.price>0?'<div class="plan-per">/month</div>':''}</div>
-      </div>
-      <div class="plan-feats">${p.feats.map(f=>`<div class="plan-feat"><span class="plan-feat-ck">✓</span>${f}</div>`).join('')}</div>
-      ${k===S.plan?`<div class="btn ghost md full" style="text-align:center;cursor:default">Current Plan</div>`:`<button class="btn ${p.popular?'gold':'green'} md full" onclick="selectPlan('${k}')">${k==='free'?'Downgrade':'Upgrade to '+p.name}</button>`}
-    </div>`).join('');
+.badge{
+padding:10px 18px;
+border-radius:30px;
+background:rgba(126,217,87,.15);
+border:1px solid rgba(126,217,87,.3);
+margin-bottom:20px;
+font-weight:700;
 }
 
-function selectPlan(k){
-  S.plan=k;
-  showToast(`${S.isAdmin?'[Admin] ':''}Plan set to ${PLANS_CFG[k].name} — connect PayFast to charge`,'ok');
-  go('account');
+.hero h2{
+font-size:clamp(40px,8vw,70px);
+line-height:1.1;
+margin-bottom:20px;
+max-width:900px;
 }
 
-// ── INIT ───────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded',()=>{
-  initLanding(); initDiscover(); initRack();
-  // Ripple on primary buttons
-  document.addEventListener('click',e=>{
-    const b=e.target.closest('.btn.green,.btn.gold');if(!b)return;
-    const r=document.createElement('span'),rect=b.getBoundingClientRect();
-    r.style.cssText=`position:absolute;width:14px;height:14px;background:rgba(255,255,255,.32);border-radius:50%;left:${e.clientX-rect.left-7}px;top:${e.clientY-rect.top-7}px;animation:ripple .5s ease forwards;pointer-events:none`;
-    b.appendChild(r);setTimeout(()=>r.remove(),500);
-  });
-  // Close modals on overlay tap
-  ['authModal','editStoreModal','aboutModal','adminPlanModal'].forEach(id=>{
-    const el=qs(id);if(!el)return;
-    el.addEventListener('click',e=>{if(e.target===el)el.classList.add('hide');});
-  });
-});
-</script>
-</body>
+.hero p{
+max-width:700px;
+font-size:20px;
+opacity:.9;
+line-height:1.7;
+}
+
+.coming{
+margin-top:30px;
+padding:16px 30px;
+border-radius:16px;
+background:#7ed957;
+color:#06240f;
+font-weight:800;
+font-size:18px;
+}
+
+.about{
+background:white;
+color:#10231a;
+padding:80px 25px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.about h3{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.about p{
+font-size:18px;
+line-height:1.8;
+margin-bottom:20px;
+}
+
+.roadmap{
+margin-top:40px;
+display:grid;
+gap:15px;
+}
+
+.road{
+padding:18px;
+border-radius:16px;
+background:#f2f6f3;
+font-weight:700;
+}
+
+.done{
+border-left:5px solid #239a44;
+}
+
+.future{
+border-left:5px solid #caa24a;
+}
+
+.studio{
+margin-top:60px;
+padding:25px;
+border-radius:20px;
+background:#0d3b1e;
+color:white;
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.mark{
+width:70px;
+height:70px;
+border-radius:16px;
+background:#1a7a37;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+font-weight:900;
+color:#7ed957;
+}
+
+footer{
+padding:30px;
+text-align:center;
+opacity:.7;
+}
+
+</style></head><body><section class="hero"><div class="bg">
+<span>LR</span>
+<span>LR</span>
+<span>LR</span>
+</div><div class="orbit-wrapper"><div class="ring">
+<div class="item">🍔</div>
+<div class="item">📱</div>
+<div class="item">👕</div>
+<div class="item">🛋️</div>
+<div class="item">💄</div>
+<div class="item">🔧</div>
+</div><div class="ring ring2">
+<div class="item">🛒</div>
+<div class="item">📦</div>
+<div class="item">🎨</div>
+<div class="item">💻</div>
+<div class="item">🍕</div>
+<div class="item">🧸</div>
+</div><div class="logo">
+<h1>LR</h1>
+<small>LOCALRACK</small>
+</div></div><div class="badge">
+⚡ Version 4.2 In Development
+</div><h2>
+Your Hustle,<br>
+Professionally Presented
+</h2><p>
+LocalRack helps small businesses create professional product catalogs,
+digital storefronts and shareable business profiles directly from their phones.
+</p><div class="coming">
+🚀 Full Platform Launching Soon
+</div></section><section class="about"><div class="container"><h3>Why LocalRack Exists</h3><p>
+Many small businesses already have products worth selling.
+What they often lack is a simple way to present those products professionally online.
+</p><p>
+LocalRack is being built to help entrepreneurs, side hustles, market stalls and local businesses create professional digital storefronts without needing a website designer.
+</p><div class="roadmap"><div class="road done">✓ Catalog Builder</div><div class="road done">✓ Store Profiles</div><div class="road done">✓ Discover Marketplace</div><div class="road future">◌ Reviews System</div><div class="road future">◌ Customer Accounts</div><div class="road future">◌ Online Payments</div><div class="road future">◌ Business Rankings</div></div><div class="studio"><div class="mark">✦</div><div>
+<h4>InkAiron Studios</h4><p>
+Create. Produce. Elevate.
+</p><p>
+Building practical digital tools for local businesses.
+</p>
+</div></div></div></section><footer>
+LocalRack • localrack.co.za
+</footer></body>
 </html>
